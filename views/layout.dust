@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColeWordle</title>
+    <link rel="icon" href="/resources\ColeWordleIconRoundHighlighted.PNG" type="image/x-icon">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        {+body /}
+    </div>
+    <script src="/js/init.js" defer></script>
+    <script src="/js/inputSuggestion.js" defer></script>
+    <script src="/js/modals.js" defer></script>
+    <script src="/js/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/b66d6c7a75.js" crossorigin="anonymous"></script>
+<body>
+</html>
