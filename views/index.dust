@@ -7,7 +7,7 @@
 <button id="theme-Reputation" class="theme-button">Reputation</button>
 
 <button id="support-button" class="support-button">
-    <i class="fa-regular fa-heart fa-lg"></i>
+    <i class="fa-solid fa-heart fa-lg"></i>
   </button>
         
 <div class="title">

@@ -19,10 +19,6 @@ document.addEventListener('initComplete', async function() {
     await getCorrectSong(id);
     await getCorrectSongAlbumCover(correctSong);
 
-    if(correctSongAlbumCover === "Cole World: The Sideline Story") {
-        correctSongAlbumCover = "Cole World The Sideline Story";
-    }
-
     const winHeader = document.createElement('h1');
     winHeader.className = 'header';
     winHeader.textContent = `Correct! The song was ${correctSong}.`;
@@ -36,19 +32,19 @@ document.addEventListener('initComplete', async function() {
     loseModalImage.src = `/resources/${correctSongAlbumCover}.jpg`;
 
     const ruleHeader = document.createElement('h1');
-    ruleHeader.textContent = `Welcome to ColeWordle!`;
+    ruleHeader.textContent = `Welcome to Swiftle!`;
     rulesModalContent.appendChild(ruleHeader);
 
     const rulePurposeMessage = document.createElement('h5');
     rulePurposeMessage.className = 'rule-purpose-message';
-    rulePurposeMessage.textContent = `Guess the mystery J. Cole song!`;
+    rulePurposeMessage.textContent = `Guess the mystery Taylor Swift song!`;
     rulesModalContent.appendChild(rulePurposeMessage);
 
     const rulesList = document.createElement('ul');
     rulesList.className = 'rules-list';
 
     const rules = [
-    "You get eight guesses to guess a mystery song from any of J. cole's 6 studio albums!",
+    "You get eight guesses to guess a mystery song from any of Taylor Swift 10 studio albums!",
     'Green in any column  indicates a complete match!',
     'Yellow in the album or track number column  indicates that this attribute is within 2 (albums or tracks).',
     'Yellow in the track length column  indicates that the song length is within 30 seconds.',

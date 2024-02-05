@@ -12,6 +12,25 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Karenz';
+    src: url('../fonts/Karenz.ttf') format('trueType');
+    font-weight: bold;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Alanta';
+    src: url('../fonts/Alanta\ Rosery.otf') format('openType');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fake-bold-Karenz {
+    font-family: 'Karenz', sans-serif;
+    font-weight: 900;
+}
+
 
 body {
     background-image: url('../resources/taylorCartoon4.JPG'); 
@@ -39,7 +58,7 @@ body::before {
     border: none;
     font-size: 4vw;
     margin-bottom: 3vw;
-    font-family: 'BlackClover';
+    font-family: 'Karenz';
 }
 
 .game-container {
@@ -52,7 +71,9 @@ body::before {
 .guess-input, .btn-primary {
     margin: 20px 0;
     width: 100%;
-    background-color: #31302e;
+    background-color: transparent;
+    font-size: 18px;
+    border-bottom: 1px solid #000000;
 }
 
 #guess-input {
@@ -60,13 +81,12 @@ body::before {
 }
 
 #submit-guess {
-    background-color: #31302e;
-    color: white;
-    border: 1px solid #31302e;
-    font-family: 'BlackClover'; 
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    font-family: 'Karenz'; 
     padding: 10px 20px;
-    font-size: 16px;
-    border: none;
+    font-size: 18px;
+    border-bottom: 2px solid #000000;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -75,6 +95,7 @@ body::before {
 #submit-guess:hover {
     background-color: #272624;
     border-color: #272624;
+    color: rgb(255, 255, 255);
 }
 
 .past-guesses {
@@ -109,14 +130,14 @@ h1 {
     width: 100%;
     top: 100%;
     left: 0; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.342);
     max-height: 200px;
     overflow-y: auto;
     display: none;
 }
 
 .suggestion-box::-webkit-scrollbar-track {
-    background: #a09e9a; /* Track color */
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
 }
 
@@ -139,12 +160,12 @@ h1 {
 
 .suggestion-item:hover{
     color: #000000;
-    background-color: #a09e9a;
-    box-shadow: inset 0 0 10px rgb(34, 33, 33); 
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0 0 10px rgb(41, 40, 40); 
 }
 
 .suggestion-item.selected {
-    background-color: #a09e9a;
+    background-color: #ffffff;
 }
 
 .input-area {
@@ -194,15 +215,19 @@ h1 {
 }
 
 .cell.black { 
-    background-color: #000000;
+    background-color: rgb(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    
  } 
 .cell.green { 
-    background-color: #3f9b4a; 
-    box-shadow: 0 0 40px #3f9b4a;
+    background-color: rgba(89, 196, 63, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(89, 196, 63);
 } 
 .cell.yellow { 
-    background-color: #e9974a; 
-    box-shadow: 0 0 40px #fcb75d;
+    background-color: rgba(243, 191, 79, 0.9); 
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(243, 191, 79);
 } 
 
 .album-image {
@@ -214,20 +239,22 @@ h1 {
 
 .matrix-row {
     display: grid;
-    grid-template-columns: 300px 50px 100px 100px 350px;
+    grid-template-columns: 300px 50px 100px 150px 350px;
     gap: 10px;
     align-items: center; 
     margin-bottom: 3px;
+    margin-left: 150px;
   }
 
 .header-matrixlabel{
-    background-color: transparent;
-    color: #FFF;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #000000;
     text-align: center;
     font-weight: bold;
-    font-family: 'BlackClover';
+    font-family: 'Karenz';
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #000000;
 }
 
 @font-face {
@@ -262,13 +289,14 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #020202;
+    backdrop-filter: blur(10px);
+    background-color: rgb(0, 0, 0, 0.7);
     padding: 20px;
     border: 1px solid #000000;
     width: 50%;
     animation-name: slideIn;
     animation-duration: 0.5s;
-    font-family: 'BlackClover';
+    font-family: 'Karenz';
   }
 
   .modal-content.win {
@@ -294,7 +322,7 @@ h1 {
   .close-button {
     color: #ffffff;
     float: right;
-    font-size: 28px;
+    font-size: 38px;
     font-weight: bold;
   }
   
@@ -317,31 +345,31 @@ h1 {
   }
 
   .rules-button{
-    background-color: #31302e;
-    color: white;
-    border: 1px solid #31302e; 
+    background-color: transparent;
+    color: rgb(0, 0, 0);
     padding: 10px 20px;
-    font-size: 16px;
-    font-family: 'BlackClover';
+    font-size: 24px;
+    font-family: 'Karenz';
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
     position: relative;
     margin-right: 350px; 
     margin-left: 0px;
+    border-bottom: 1px solid #000000
   }
 
-  .rules-button:hover,
-  .rules-button:focus {
-    background-color: #272624;
-    border-color: #272624;
+  .rules-button:hover{
+    background-color: #525252;
     text-decoration: none;
+    color: rgb(255, 255, 255);
     cursor: pointer;
+    border-bottom: 1px solid #000000
   }
 
   .rules-list{
     color: #ffffff;
-    font-family: 'BlackClover';
+    font-family: 'sans-serif';
     list-style-type: none;
     list-style-type: disc;
     padding-left: 40px;
@@ -355,7 +383,7 @@ h1 {
 
   .rule-purpose-message{
     color: #acacac;
-    font-family: 'BlackClover';
+    font-family: 'Karenz';
     font-size: 20px;
     margin-bottom: 40px;
   }
@@ -375,45 +403,44 @@ h1 {
   }
 
   .support-button{
-    background-color: #31302e;
-    color: white;
-    border: 1px solid #31302e; 
+    background-color: transparent;
+    color: white; 
     padding: 10px 20px;
-    font-size: 16px;
-    font-family: 'BlackClover';
+    font-size: 20px;
+    font-family: 'Karenz';
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 400px;
+    border-bottom: 1px solid #ccc
   }
 
-  .support-button:hover,
-  .support-button:focus {
-    background-color: #272624;
-    border-color: #272624;
+  .support-button:hover{
+    background-color: #525252;
     text-decoration: none;
     cursor: pointer;
+    border-bottom: 1px solid #ccc
   }
 
   .theme-button{
-    background-color: #31302e;
-    color: white;
-    border: 1px solid #31302e; 
+    background-color: transparent;
+    color: rgb(0, 0, 0);
     padding: 10px 20px;
-    font-size: 16px;
-    font-family: 'BlackClover';
+    font-size: 20px;
+    font-family: 'Karenz';
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 0px;
+    border-bottom: 1px solid #000000
   }
 
-  .theme-button:hover,
-  .theme-button:focus {
-    background-color: #272624;
-    border-color: #272624;
+  .theme-button:hover{
+    background-color: #525252;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     cursor: pointer;
+    border-bottom: 1px solid #000000
   }
