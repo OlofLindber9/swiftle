@@ -1,0 +1,419 @@
+@font-face {
+    font-family: 'OldeEnglish';
+    src: url('../fonts/OldeEnglish.ttf') format('trueType');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BlackClover';
+    src: url('../fonts/BlackCloverFont.ttf') format('trueType');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+    background-image: url('../resources/taylorCartoon4.JPG'); 
+    background-size: cover;
+    background-position: center;   
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 500px rgba(185, 182, 179, 0.616); 
+    z-index: 1;
+}
+
+.title{
+    background-color: transparent;
+    color: #0f0f0f;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    font-size: 4vw;
+    margin-bottom: 3vw;
+    font-family: 'BlackClover';
+}
+
+.game-container {
+    text-align: center;
+    background-color: transparent;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.guess-input, .btn-primary {
+    margin: 20px 0;
+    width: 100%;
+    background-color: #31302e;
+}
+
+#guess-input {
+    flex-grow: 1;
+}
+
+#submit-guess {
+    background-color: #31302e;
+    color: white;
+    border: 1px solid #31302e;
+    font-family: 'BlackClover'; 
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+#submit-guess:hover {
+    background-color: #272624;
+    border-color: #272624;
+}
+
+.past-guesses {
+    list-style-type: none;
+    padding: 0;
+}
+
+.past-guesses li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+h1 {
+    color: whitesmoke
+}
+
+
+.suggestion-box {
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    top: 100%;
+    left: 0; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.suggestion-box::-webkit-scrollbar-track {
+    background: #a09e9a; /* Track color */
+    border-radius: 10px;
+}
+
+.suggestion-box::-webkit-scrollbar-thumb {
+    background: #000000; /* Thumb color */
+    border-radius: 10px;
+}
+
+.suggestion-box::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Thumb hover color */
+}
+
+.suggestion-box::-webkit-scrollbar {
+    width: 8px; /* Scrollbar width */
+}
+
+.suggestion-item{
+    color: #fcfcfc;
+}
+
+.suggestion-item:hover{
+    color: #000000;
+    background-color: #a09e9a;
+    box-shadow: inset 0 0 10px rgb(34, 33, 33); 
+}
+
+.suggestion-item.selected {
+    background-color: #a09e9a;
+}
+
+.input-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    width: 400px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+
+.cell {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 15px;
+    margin: 0 4px;
+    margin-right: -3px;
+    margin-left: -3px;
+    border: 1px solid antiquewhite;
+    text-align: center;
+    color: white;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+.cell.image {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 2px;
+    margin: 0 4px;
+    margin-right: -3px;
+    margin-left: -3px;
+    border: 1px solid antiquewhite;
+    text-align: center;
+    color: white;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+.cell.black { 
+    background-color: #000000;
+ } 
+.cell.green { 
+    background-color: #3f9b4a; 
+    box-shadow: 0 0 40px #3f9b4a;
+} 
+.cell.yellow { 
+    background-color: #e9974a; 
+    box-shadow: 0 0 40px #fcb75d;
+} 
+
+.album-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.matrix-row {
+    display: grid;
+    grid-template-columns: 300px 50px 100px 100px 350px;
+    gap: 10px;
+    align-items: center; 
+    margin-bottom: 3px;
+  }
+
+.header-matrixlabel{
+    background-color: transparent;
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'BlackClover';
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+@font-face {
+    font-family: 'BodoniModa';
+    src: url('public/fonts/Bodoni_Moda/BodoniModa-VariableFont_opsz,wght.ttf') format('trueType');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #020202;
+    padding: 20px;
+    border: 1px solid #000000;
+    width: 50%;
+    animation-name: slideIn;
+    animation-duration: 0.5s;
+    font-family: 'BlackClover';
+  }
+
+  .modal-content.win {
+    box-shadow: 0 0 40px #3f9b4a;
+  }
+
+  .modal-content.lose {
+    box-shadow: 0 0 40px #702424;
+  }
+
+  .modal-content.rules {
+    box-shadow: 0 0 40px #aaaaaa;
+  }
+
+  .modal-image {
+    max-width: 60%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+  /* The Close Button */
+  .close-button {
+    color: #ffffff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close-button:hover,
+  .close-button:focus {
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Add Animation */
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes slideIn {
+    from {top: -300px; opacity: 0}
+    to {top: 50%; opacity: 1;}
+  }
+
+  .rules-button{
+    background-color: #31302e;
+    color: white;
+    border: 1px solid #31302e; 
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'BlackClover';
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    margin-right: 350px; 
+    margin-left: 0px;
+  }
+
+  .rules-button:hover,
+  .rules-button:focus {
+    background-color: #272624;
+    border-color: #272624;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .rules-list{
+    color: #ffffff;
+    font-family: 'BlackClover';
+    list-style-type: none;
+    list-style-type: disc;
+    padding-left: 40px;
+  }
+
+  .rules-list li {
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .rule-purpose-message{
+    color: #acacac;
+    font-family: 'BlackClover';
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+
+  .green-text {
+    background-color: #1d7a33;
+    padding: 0.2em 0.4em;
+    border-radius: 0.5em;
+    box-decoration-break: clone;
+  }
+  
+  .yellow-text {
+    background-color: #c59504;
+    padding: 0.2em 0.4em;
+    border-radius: 0.5em;
+    box-decoration-break: clone;
+  }
+
+  .support-button{
+    background-color: #31302e;
+    color: white;
+    border: 1px solid #31302e; 
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'BlackClover';
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative; 
+    margin-left: 400px;
+  }
+
+  .support-button:hover,
+  .support-button:focus {
+    background-color: #272624;
+    border-color: #272624;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .theme-button{
+    background-color: #31302e;
+    color: white;
+    border: 1px solid #31302e; 
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'BlackClover';
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative; 
+    margin-left: 0px;
+  }
+
+  .theme-button:hover,
+  .theme-button:focus {
+    background-color: #272624;
+    border-color: #272624;
+    text-decoration: none;
+    cursor: pointer;
+  }

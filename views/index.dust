@@ -2,12 +2,16 @@
 
 {<body}
 <button id="rules-button" class="rules-button">Rules</button>
+<button id="theme-1989" class="theme-button">1989</button>
+<button id="theme-Lover" class="theme-button">Lover</button>
+<button id="theme-Reputation" class="theme-button">Reputation</button>
+
 <button id="support-button" class="support-button">
     <i class="fa-regular fa-heart fa-lg"></i>
   </button>
         
 <div class="title">
-    ColeWordle
+    Swiftle
 </div>
 
 

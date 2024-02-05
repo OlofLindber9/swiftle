@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ColeWordle</title>
+    <title>Swiftle</title>
     <link rel="icon" href="/resources\ColeWordleIconRoundHighlighted.PNG" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link id="theme-style" rel="stylesheet" type="text/css" href="/css/style1989.css">
 </head>
 <body>
     <div class="game-container">
@@ -16,6 +16,7 @@
     <script src="/js/inputSuggestion.js" defer></script>
     <script src="/js/modals.js" defer></script>
     <script src="/js/script.js" defer></script>
-    <script src="https://kit.fontawesome.com/b66d6c7a75.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b66d6c7a75.js" crossorigin="anonymous"defer></script>
+    <script src="/js/theme-switcher.js"defer></script>
 <body>
 </html>

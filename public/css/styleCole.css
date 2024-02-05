@@ -310,8 +310,8 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s ease;
     position: relative;
-    margin-right: -900px; 
-    margin-left: 20px;
+    margin-right: 350px; 
+    margin-left: 0px;
   }
 
   .rules-button:hover,
@@ -368,11 +368,33 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s ease;
     position: relative; 
-    margin-left: 20px;
+    margin-left: 400px;
   }
 
   .support-button:hover,
   .support-button:focus {
+    background-color: #272624;
+    border-color: #272624;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .theme-button{
+    background-color: #31302e;
+    color: white;
+    border: 1px solid #31302e; 
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'BodoniModa';
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative; 
+    margin-left: 0px;
+  }
+
+  .theme-button:hover,
+  .theme-button:focus {
     background-color: #272624;
     border-color: #272624;
     text-decoration: none;
