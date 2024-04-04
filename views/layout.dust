@@ -6,7 +6,7 @@
     <title>Swiftle</title>
     <link rel="icon" href="/resources\ColeWordleIconRoundHighlighted.PNG" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link id="theme-style" rel="stylesheet" type="text/css" href="/css/style1989.css">
+    <link id="theme-style" rel="stylesheet" type="text/css" href="/css/styleLover.css">
 </head>
 <body>
     <div class="game-container">

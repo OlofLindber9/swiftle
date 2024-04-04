@@ -416,6 +416,7 @@ h1 {
     padding: 10px 20px;
     font-size: 24px;
     font-family: '1989';
+    display : inline-block;
     border: transparent;
     border-radius: 20px;
     cursor: pointer;

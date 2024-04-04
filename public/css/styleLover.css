@@ -1,3 +1,14 @@
+:root {
+  --bg: #080B12;
+  --text: #CFB3E6;
+  --border-grd1: #6C6499;
+  --border-grd2: #111222;
+  --card-grd1: #1F193D;
+  --card-grd2: #05060D;
+  --radial-center: rgba(173,155,255,0.3);
+  --radial-edge: rgba(11,12,22,0.3);
+  --shadow: rgba(173,155,255,0.5);
+}
 
 @font-face {
   font-family: 'soulmate';
@@ -16,11 +27,10 @@
 body {
   background-image: url('../resources/lover.JPG'); 
   background-size: cover;
-  background-position: center; 
+  background-position: center;   
 }
 
-body::before,
-body::after {
+body::before {
     content: '';
     position: fixed;
     top: 0;
@@ -29,19 +39,6 @@ body::after {
     bottom: 0;
     pointer-events: none;
     box-shadow: inset 0 0 500px rgba(185, 182, 179, 0.616); 
-    z-index: 1;  
-
-    opacity: 30%;
-}
-
-body::before {
-    background-image: url('../resources/lover.JPG');
-    filter: url(../svg/grainy.svg#noiseFilter3);  
-}
-
-.grainy-texture {
-  background: url(../svg/grainy.svg);
-  filter: contrast(150%) brightness(300%);
 }
 
 .title{
@@ -59,6 +56,15 @@ body::before {
     border-radius: 30px;
     font-size: 5.5vw;
     font-family: 'alexBrush';
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
+    transition: all ease 0.3s;
+    filter: drop-shadow(0px 0px 0px rgb(173,155,255,0));
+    z-index: 1;
 }
 
 .game-container {
@@ -128,7 +134,6 @@ h1 {
 .suggestion-box {
     backdrop-filter: blur(10px);
     background-color: rgba(240, 171, 194, 0.507);
-    background: url(../svg/grainy.svg);
     position: absolute;
     z-index: 1000;
     width: 100%;
@@ -259,6 +264,37 @@ h1 {
     font-family: 'soulmate';
     border: transparent;
     border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
+    transition: all ease 0.3s;
+    filter: drop-shadow(0px 0px 0px rgb(173,155,255,0));
+    z-index: 1;
+}
+
+.header-matrixlabel::after{
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  z-index: 2;
+  filter: contrast(190%) brightness(250%);
+  background: 
+  linear-gradient(51deg, rgba(59,7,59,0.65), rgba(120,80,148,0.61)),
+  url("data:image/svg+xml,%3Csvg viewBox='0 0 263 263' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.73' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 26%;
+  mix-blend-mode: hard-light;
+  transition: all ease 0.3s;
+  pointer-events: none;
 }
 
 @font-face {
@@ -292,7 +328,6 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: url(../svg/grainy.svg#noiseFilter3);
     background-image: url('../resources/lovermodaledited.JPG');
     background-size: cover;
     backdrop-filter: blur(20px);
@@ -303,9 +338,6 @@ h1 {
     animation-name: slideIn;
     animation-duration: 0.5s;
     font-family: 'soulmate';
-    z-index: 1;
-    opacity: 0.95;
-    mix-blend-mode: multiply;
   }
 
   .modal-content.win {
@@ -363,10 +395,38 @@ h1 {
     border: transparent;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     position: relative;
     margin-right: 350px; 
     margin-left: 0px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
+    transition: all ease 0.3s;
+    filter: drop-shadow(0px 0px 0px rgb(173,155,255,0));
+    z-index: 1;
+  }
+
+  .rules-button::after{
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    z-index: 2;
+    filter: contrast(190%) brightness(250%);
+    background: 
+    linear-gradient(51deg, rgba(59,7,59,0.65), rgba(120,80,148,0.61)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 263 263' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.73' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 26%;
+    mix-blend-mode: hard-light;
+    transition: all ease 0.3s;
+    pointer-events: none;
   }
 
   .rules-button:hover{
@@ -412,6 +472,7 @@ h1 {
   }
 
   .support-button{
+    overflow: hidden;
     backdrop-filter: blur(10px);
     background-color: rgba(240, 171, 194, 0.507);
     color: #D3437D;
@@ -422,9 +483,36 @@ h1 {
     border: transparent;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 400px;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
+    transition: all ease 0.3s;
+    filter: drop-shadow(0px 0px 0px rgb(173,155,255,0));
+    z-index: 1;
+  }
+
+  .support-button::after{
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    z-index: 2;
+    filter: contrast(190%) brightness(250%);
+    background: 
+    linear-gradient(51deg, rgba(59,7,59,0.65), rgba(120,80,148,0.61)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 263 263' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.73' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 26%;
+    mix-blend-mode: hard-light;
+    transition: all ease 0.3s;
+    pointer-events: none;
   }
 
   .support-button:hover{
@@ -435,19 +523,47 @@ h1 {
   }
 
   .theme-button{
+    overflow: hidden;
     backdrop-filter: blur(10px);
     background-color: rgba(240, 171, 194, 0.507);
     color: #D3437D;
-    border: 1px solid #31302e; 
     padding: 10px 20px;
     font-size: 24px;
     font-family: 'soulmate';
     border: transparent;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 0px;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
+    transition: all ease 0.3s;
+    filter: drop-shadow(0px 0px 0px rgb(173,155,255,0));
+    z-index: 1;
+  }
+
+  .theme-button::after{
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    z-index: 2;
+    filter: contrast(190%) brightness(250%);
+    background: 
+    linear-gradient(51deg, rgba(59,7,59,0.65), rgba(120,80,148,0.61)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 263 263' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.73' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 26%;
+    mix-blend-mode: hard-light;
+    transition: all ease 0.3s;
+    pointer-events: none;
   }
 
   .theme-button:hover {
@@ -455,4 +571,26 @@ h1 {
     color: #faecbe;
     text-decoration: none;
     cursor: pointer;
+  }
+
+
+
+
+
+  /*____________________________________________classes for theme sensetive elements____________________________________________*/
+
+  
+  .loverGrainFilter {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    z-index: 2;
+    filter: contrast(190%) brightness(250%);
+    background: 
+    linear-gradient(51deg, rgba(59,7,59,0.65), rgba(120,80,148,0.61)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 263 263' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.73' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 26%;
+    mix-blend-mode: hard-light;
+    transition: all ease 0.3s;
   }
