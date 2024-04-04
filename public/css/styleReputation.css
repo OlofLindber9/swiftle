@@ -59,6 +59,7 @@ body::before {
     font-size: 4vw;
     margin-bottom: 3vw;
     font-family: 'Karenz';
+    transition: all ease 0.3s;
 }
 
 .game-container {
@@ -255,6 +256,7 @@ h1 {
     font-family: 'Karenz';
     border: none;
     border-bottom: 1px solid #000000;
+    transition: all ease 0.3s;
 }
 
 @font-face {
@@ -356,7 +358,8 @@ h1 {
     position: relative;
     margin-right: 350px; 
     margin-left: 0px;
-    border-bottom: 1px solid #000000
+    border-bottom: 1px solid #000000;
+    transition: all ease 0.3s;
   }
 
   .rules-button:hover{
@@ -413,7 +416,8 @@ h1 {
     transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 400px;
-    border-bottom: 1px solid #ccc
+    border-bottom: 1px solid #ccc;
+    transition: all ease 0.3s;
   }
 
   .support-button:hover{
@@ -435,7 +439,8 @@ h1 {
     transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 0px;
-    border-bottom: 1px solid #000000
+    border-bottom: 1px solid #000000;
+    transition: all ease 0.3s;
   }
 
   .theme-button:hover{

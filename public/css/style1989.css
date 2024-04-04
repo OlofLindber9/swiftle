@@ -39,6 +39,7 @@ body::before {
     border-radius: 50px;
     font-size: 5.5vw;
     font-family: '1989';
+    transition: all ease 0.3s;
 }
 
 .game-container {
@@ -238,6 +239,7 @@ h1 {
     border: transparent;
     border-radius: 10px;
     border-bottom: 1px solid #ccc;
+    transition: all ease 0.3s;
 }
 
 @font-face {
@@ -341,6 +343,7 @@ h1 {
     position: relative;
     margin-right: 350px; 
     margin-left: 0px;
+    transition: all ease 0.3s;
   }
 
   .rules-button:hover{
@@ -399,6 +402,7 @@ h1 {
     transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 400px;
+    transition: all ease 0.3s;
   }
 
   .support-button:hover{
@@ -423,6 +427,7 @@ h1 {
     transition: background-color 0.3s ease;
     position: relative; 
     margin-left: 0px;
+    transition: all ease 0.3s;
   }
 
   .theme-button:hover {
