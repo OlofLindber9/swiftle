@@ -28,7 +28,7 @@ app.use(bodyparser.urlencoded( {extended: false}));
 const cors = require('cors');
 app.use(cors({
     origin: function (origin, callback) {
-        const allowedOrigins = ['http://90.224.206.14', 'http://localhost:5500', 'http://127.0.0.1:5500'];
+        const allowedOrigins = ['http://90.224.206.14', 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://192.168.0.155:5500'];
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
@@ -110,10 +110,10 @@ app.get('/api/length', async (req, res) => {
 });
 
 //get song features
-app.get('/api/features', async (req, res) => {
+app.get('/api/streams', async (req, res) => {
     const songName = req.query.name;
     try {
-        const result = await client.query('SELECT features FROM songs WHERE name = $1', [songName]);
+        const result = await client.query('SELECT streams FROM songs WHERE name = $1', [songName]);
         res.json(result.rows);
     } catch (err) {
         console.error('Error executing query', err.stack);

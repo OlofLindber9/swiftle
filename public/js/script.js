@@ -3,31 +3,37 @@ document.addEventListener('initComplete', async function() {
     const targetSong = await getCorrectSong(window.correctSongId);
     const submitButton = document.getElementById("submit-guess");
     const guessInput = document.getElementById("guess-input");
-    const attemptsDiv = document.querySelector(".attempts");
+    const gameDiv = document.querySelector(".attempts");
     const rulesButton = document.getElementById("rules-button");
     const attemptLimit = 8;
     const AlbumOrder = {
-        "Cole World: The Sideline Story": 1,
-        "Born Sinner": 2,
-        "2014 Forest Hills Drive": 3,
-        "4 Your Eyez Only": 4,
-        "KOD": 5,
-        "The Off-Season": 6
+        "Taylor Swift": 1,
+        "Fearless": 2,
+        "Speak Now": 3,
+        "Red": 4,
+        "1989": 5,
+        "Reputation": 6,
+        "Lover": 7,
+        "Folklore": 8,
+        "Evermore": 9,
+        "Midnights": 10
     };
     let numberOfAttempts = 0;
-    var targetAlbum;
     var guessTrackNumber;
     var guessLength;
-    var guessFeatures;
+    var guessStreams;
     var gameOver = false;
     var victoryModal = document.getElementById('victoryModal'); 
     var loseModal = document.getElementById('loseModal');
     var rulesModal = document.getElementById('rulesModal');
 
 
-    const headerRow = document.createElement('li');  
+    const headerRow = document.createElement('li');
+    const attemptsDiv = document.createElement('li');  
+    attemptsDiv.style.listStyleType = 'none';
     headerRow.className = "matrix-row";
-    attemptsDiv.appendChild(headerRow); 
+    attemptsDiv.className = "guessesMatrix";
+    gameDiv.appendChild(headerRow); 
 
     const songNameheader = document.createElement('div');
     songNameheader.className = 'header-matrixlabel';
@@ -49,10 +55,10 @@ document.addEventListener('initComplete', async function() {
     songLengthheader.textContent = 'Track Length'
     headerRow.appendChild(songLengthheader);
 
-    const songFeatureheader = document.createElement('div');
-    songFeatureheader.className = 'header-matrixlabel';
-    songFeatureheader.textContent = 'Features'
-    headerRow.appendChild(songFeatureheader); 
+    const songStreamsheader = document.createElement('div');
+    songStreamsheader.className = 'header-matrixlabel';
+    songStreamsheader.textContent = 'Streams'
+    headerRow.appendChild(songStreamsheader); 
 
 
     async function getCorrectSong(id) {
@@ -153,9 +159,6 @@ document.addEventListener('initComplete', async function() {
         .then(data => {
             info = data;
             albumName = info[0].album;
-            if(albumName === "Cole World: The Sideline Story") {
-                albumName = "Cole World The Sideline Story";
-            }
             var albumImage = document.createElement('img');
             albumImage.className = 'album-image';
             albumImage.src = `/resources/${albumName}.jpg`;
@@ -167,6 +170,18 @@ document.addEventListener('initComplete', async function() {
         })
         .then(response => response.json())
         .then(data => {
+
+            var arrowText = document.createElement('span');
+            arrowText.className = 'arrow-text';
+
+            if(AlbumOrder[guessAlbum] < AlbumOrder[data[0].album]){
+                arrowText.textContent ='   ↑';
+                songAlbumCell.appendChild(arrowText);
+            }else if (AlbumOrder[guessAlbum] > AlbumOrder[data[0].album]){
+                arrowText.textContent ='   ↓';
+                songAlbumCell.appendChild(arrowText);
+            }
+
             if ((AlbumOrder[guessAlbum] - AlbumOrder[data[0].album]) === 0){
                 songAlbumCell.classList.add('green');
             }
@@ -253,27 +268,38 @@ document.addEventListener('initComplete', async function() {
         .catch(error => console.error('Error fetching data:', error));
     }
 
-    function displaySongFeature(guess, songFeatureCell){
+    function displaySongStreams(guess, songStreamsCell){
 
         var info;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://localhost:5500/api/features?name=${encodedSongName}`
+        let url = `http://localhost:5500/api/streams?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://localhost:5500/api/features?name=${encodedTargetSongName}`
+        let url2 = `http://localhost:5500/api/streams?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
         .then(data => {
             info = data;
-            songFeatureCell.textContent = info[0].features;
-            guessFeatures = info[0].features;
+            songStreamsCell.textContent = info[0].streams;
+            guessStreams = info[0].streams;
             return fetch(url2);
         })
         .then(response => response.json())
         .then(data => {
-            if (guessFeatures === data[0].features){
-                songFeatureCell.classList.add('green');
+
+            if(convertStreamsStringToSeconds(guessStreams) < convertStreamsStringToSeconds(data[0].streams)){
+                songStreamsCell.textContent = info[0].streams +'   ↑';
+            }else if (convertStreamsStringToSeconds(guessStreams) > convertStreamsStringToSeconds(data[0].streams)){
+                songStreamsCell.textContent = info[0].streams +'   ↓';
+            }
+
+            if (guessStreams === data[0].streams){
+                songStreamsCell.classList.add('green');
+            }
+
+            else if (Math.abs(convertStreamsStringToSeconds(guessStreams) - convertStreamsStringToSeconds(data[0].streams)) < 51){
+                songStreamsCell.classList.add('yellow');
             }
         })
         .catch(error => console.error('Error fetching data:', error));
@@ -287,9 +313,21 @@ document.addEventListener('initComplete', async function() {
         return (minutes * 60) + seconds;
     }
 
-    async function displayAttempt(guess, guessRow){
+    function convertStreamsStringToSeconds(streamsString) {
+        for (let i = 0; i < streamsString.length; i++) {
+            if (streamsString[i] === 'M') {
+                streamsString = streamsString.substring(0, i) + streamsString.substring(i + 1);
+            }
+        }
+        const streams = parseInt(streamsString, 10);
+        return streams;
+    }
 
-        attemptsDiv.appendChild(guessRow);
+    async function displayAttempt(guess, guessRow){
+        
+        if (!gameDiv.contains(attemptsDiv)) {
+        gameDiv.appendChild(attemptsDiv);
+        }
 
         const songNameCell = document.createElement('div');
         songNameCell.className = 'cell black';
@@ -307,16 +345,19 @@ document.addEventListener('initComplete', async function() {
         songLengthCell.className = 'cell black';
         guessRow.appendChild(songLengthCell);
 
-        const songFeatureCell = document.createElement('div');
-        songFeatureCell.className = 'cell black';
-        guessRow.appendChild(songFeatureCell);
+        const songStreamsCell = document.createElement('div');
+        songStreamsCell.className = 'cell black';
+        guessRow.appendChild(songStreamsCell);
+
+        attemptsDiv.appendChild(guessRow);
 
         await displaySongName(guess, songNameCell);
         await displaySongAlbum(guess, songAlbumCell);
         await displaySongNumber(guess, songNumberCell);
         await displaySongLength(guess, songLengthCell);
-        await displaySongFeature(guess, songFeatureCell);
+        await displaySongStreams(guess, songStreamsCell);
         await new Promise(resolve => setTimeout(resolve, 100));
+        attemptsDiv.lastElementChild.scrollIntoView(true);
     }
 
     async function checkInput(input){
@@ -355,7 +396,7 @@ document.addEventListener('initComplete', async function() {
                        guessData.album === targetData.album &&
                        guessData.length === targetData.length &&
                        guessData.tracknumber === targetData.tracknumber &&
-                       guessData.features === targetData.features;
+                       guessData.streams === targetData.streams;
             } else {
                 return false;
             }

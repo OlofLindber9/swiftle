@@ -25,7 +25,7 @@
 }
 
 body {
-  background-image: url('../resources/lover.JPG'); 
+  background-image: url('../resources/loverBckground.JPG'); 
   background-size: cover;
   background-position: center;   
 }
@@ -103,6 +103,29 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+}
+
+.guessesMatrix{
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.guessesMatrix::-webkit-scrollbar-track {
+  background: #D3437D; /* Track color */
+  border-radius: 10px;
+}
+
+.guessesMatrix::-webkit-scrollbar-thumb {
+  background: #912d55; /* Thumb color */
+  border-radius: 10px;
+}
+
+.guessesMatrix::-webkit-scrollbar-thumb:hover {
+  background: #faecbe; /* Thumb hover color */
+}
+
+.guessesMatrix::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
 }
 
 body, html {
@@ -229,10 +252,13 @@ h1 {
 } 
 
 .album-image {
-    width: 100%;
-    height: auto;
+    width: 93%;
+    height: 93%;
     display: block;
-    object-fit: cover;
+}
+
+.arrow-text {
+  font-size: 30px;
 }
 
 .matrix-row {

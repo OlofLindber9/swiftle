@@ -123,6 +123,29 @@ h1 {
     color: whitesmoke
 }
 
+.guessesMatrix{
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.guessesMatrix::-webkit-scrollbar-track {
+  background: #ffffff; /* Track color */
+  border-radius: 10px;
+}
+
+.guessesMatrix::-webkit-scrollbar-thumb {
+  background: #000000; /* Thumb color */
+  border-radius: 10px;
+}
+
+.guessesMatrix::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Thumb hover color */
+}
+
+.guessesMatrix::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
+}
+
 
 .suggestion-box {
     background-color: rgb(0, 0, 0);
@@ -232,15 +255,18 @@ h1 {
 } 
 
 .album-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
+  width: 93%;
+  height: 93%;
+  display: block;
+}
+
+.arrow-text {
+font-size: 30px;
 }
 
 .matrix-row {
     display: grid;
-    grid-template-columns: 300px 50px 100px 150px 350px;
+    grid-template-columns: 300px 90px 100px 150px 350px;
     gap: 10px;
     align-items: center; 
     margin-bottom: 3px;
