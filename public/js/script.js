@@ -19,9 +19,6 @@ document.addEventListener('initComplete', async function() {
         "Midnights": 10
     };
     let numberOfAttempts = 0;
-    var guessTrackNumber;
-    var guessLength;
-    var guessStreams;
     var gameOver = false;
     var victoryModal = document.getElementById('victoryModal'); 
     var loseModal = document.getElementById('loseModal');
@@ -59,11 +56,14 @@ document.addEventListener('initComplete', async function() {
     songStreamsheader.className = 'header-matrixlabel';
     songStreamsheader.textContent = 'Streams'
     headerRow.appendChild(songStreamsheader); 
+    //resetGuesses();
+    //completeReset();
+    checkGameStatus();
 
 
     async function getCorrectSong(id) {
         try {
-            const response = await fetch(`http://192.168.0.155:5500/api/correctSong?id=${encodeURIComponent(id)}`);
+            const response = await fetch(`http://90.224.206.14:81/api/correctSong?id=${encodeURIComponent(id)}`);
             const song = await response.json();
             return song[0].song;
         } catch (error) {
@@ -98,12 +98,15 @@ document.addEventListener('initComplete', async function() {
             guessInput.value = '';
             gameOver = true; 
             victoryModal.style.display = 'block';  
-            //playGameOverSound();      
-            //_______________________________________________________...Ready For It.mp3 har inte frågetecken?_______________________________________      
+            playGameOverSound(targetSong);
+            saveGameState('win');   
+            saveGuess(guess, numberOfAttempts);        
             return;
         }
 
         numberOfAttempts++
+
+        saveGuess(guess, numberOfAttempts);
 
         if (numberOfAttempts >= attemptLimit){
             if (numberOfAttempts <= attemptLimit){
@@ -111,7 +114,8 @@ document.addEventListener('initComplete', async function() {
                 guessRow.className = "matrix-row"; 
                 await displayAttempt(guess, guessRow);   
             }
-            loseModal.style.display = 'block';   
+            loseModal.style.display = 'block';
+            saveGameState('lose');   
             return;
         }
 
@@ -132,7 +136,7 @@ document.addEventListener('initComplete', async function() {
     function displaySongName(guess, songNameCell) {
     
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://192.168.0.155:5500/api/name?name=${encodedSongName}`;
+        let url = `http://90.224.206.14:81/api/name?name=${encodedSongName}`;
     
         fetch(url)
             .then(response => response.json())
@@ -150,11 +154,14 @@ document.addEventListener('initComplete', async function() {
     function displaySongAlbum(guess, songAlbumCell){
 
         var info;
+        let albumName;
+        let guessAlbum; 
+
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://192.168.0.155:5500/api/album?name=${encodedSongName}`
+        let url = `http://90.224.206.14:81/api/album?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://192.168.0.155:5500/api/album?name=${encodedTargetSongName}`
+        let url2 = `http://90.224.206.14:81/api/album?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -167,7 +174,6 @@ document.addEventListener('initComplete', async function() {
             guessAlbum = info[0].album;
             songAlbumCell.classList.add('image');
             songAlbumCell.appendChild(albumImage);
-            console.log(info)
             return fetch(url2);
         })
         .then(response => response.json())
@@ -187,7 +193,7 @@ document.addEventListener('initComplete', async function() {
             if ((AlbumOrder[guessAlbum] - AlbumOrder[data[0].album]) === 0){
                 songAlbumCell.classList.add('green');
             }
-            else if (Math.abs(AlbumOrder[guessAlbum] -  AlbumOrder[data[0].album]) < 3){    //THIS DOESN'T INDICATE IF YOU ARE ABOVE OR UNDER
+            else if (Math.abs(AlbumOrder[guessAlbum] -  AlbumOrder[data[0].album]) < 3){
                 songAlbumCell.classList.add('yellow');
             }
         })
@@ -198,11 +204,12 @@ document.addEventListener('initComplete', async function() {
     function displaySongNumber(guess, songNumberCell){
 
         var info;
+        let guessTrackNumber;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://192.168.0.155:5500/api/tracknumber?name=${encodedSongName}`
+        let url = `http://90.224.206.14:81/api/tracknumber?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://192.168.0.155:5500/api/tracknumber?name=${encodedTargetSongName}`
+        let url2 = `http://90.224.206.14:81/api/tracknumber?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -235,11 +242,12 @@ document.addEventListener('initComplete', async function() {
     function displaySongLength(guess, songLengthCell){
 
         var info;
+        let guessLength;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://192.168.0.155:5500/api/length?name=${encodedSongName}`
+        let url = `http://90.224.206.14:81/api/length?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://192.168.0.155:5500/api/length?name=${encodedTargetSongName}`
+        let url2 = `http://90.224.206.14:81/api/length?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -273,11 +281,12 @@ document.addEventListener('initComplete', async function() {
     function displaySongStreams(guess, songStreamsCell){
 
         var info;
+        let guessStreams;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://192.168.0.155:5500/api/streams?name=${encodedSongName}`
+        let url = `http://90.224.206.14:81/api/streams?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://192.168.0.155:5500/api/streams?name=${encodedTargetSongName}`
+        let url2 = `http://90.224.206.14:81/api/streams?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -364,7 +373,7 @@ document.addEventListener('initComplete', async function() {
 
     async function checkInput(input){
         let encodedInput = encodeURIComponent(input);
-        let url = `http://192.168.0.155:5500/api/count?q=${encodedInput}`;
+        let url = `http://90.224.206.14:81/api/count?q=${encodedInput}`;
 
         try{
             const response = await fetch(url);
@@ -383,11 +392,11 @@ document.addEventListener('initComplete', async function() {
         let guessData, targetData;
 
         try {
-            let guessResponse = await fetch(`http://192.168.0.155:5500/api/songdata?name=${encodeURIComponent(guess)}`);
+            let guessResponse = await fetch(`http://90.224.206.14:81/api/songdata?name=${encodeURIComponent(guess)}`);
             let guessResult = await guessResponse.json();
             guessData = guessResult[0];
     
-            let targetResponse = await fetch(`http://192.168.0.155:5500/api/songdata?name=${encodeURIComponent(targetSong)}`);
+            let targetResponse = await fetch(`http://90.224.206.14:81/api/songdata?name=${encodeURIComponent(targetSong)}`);
             let targetResult = await targetResponse.json();
             targetData = targetResult[0];
     
@@ -395,10 +404,10 @@ document.addEventListener('initComplete', async function() {
             if (guessData && targetData) {
 
                 return guessData.name === targetData.name &&
-                       guessData.album === targetData.album &&
-                       guessData.length === targetData.length &&
-                       guessData.tracknumber === targetData.tracknumber &&
-                       guessData.streams === targetData.streams;
+                    guessData.album === targetData.album &&
+                    guessData.length === targetData.length &&
+                    guessData.tracknumber === targetData.tracknumber &&
+                    guessData.streams === targetData.streams;
             } else {
                 return false;
             }
@@ -412,10 +421,114 @@ document.addEventListener('initComplete', async function() {
     supportButton.addEventListener('click', function() {
         window.open('https://ko-fi.com/colewordle', '_blank');
     });
-    
-  function playGameOverSound() {
-    var gameOverSound = new Audio(`/resources/Taylor_Swift__Lavender_Haze__sample.mp3`); 
-    gameOverSound.play();
-}
+        
+    function playGameOverSound(targetSong) {
+        if (targetSong === '…Ready for It?') {
+            targetSong = '...Ready For It';
+        } else if (targetSong === 'So It Goes…') {
+            targetSong = 'So It Goes…';
+        } else if (targetSong === 'Question...?') {
+            targetSong = 'Question...';
+        }
+        var gameOverSound = new Audio(`/resources/snippets/${targetSong}.mp3`); 
+        gameOverSound.play();
 
+            //...Ready For It.mp3 is not listed in the text file.
+            //So It Goes….mp3 is not listed in the text file.
+            //Question....mp3 is not listed in the text file.
+    }
+
+
+    //_____________________________________________________________________________________LOGIC FOR LOCAL STORAGE_____________________________________________________________________________________
+    //_____________________________________________________________________________________LOGIC FOR LOCAL STORAGE_____________________________________________________________________________________
+    //_____________________________________________________________________________________LOGIC FOR LOCAL STORAGE_____________________________________________________________________________________
+
+
+    function checkGameStatus() {
+        const gameState = localStorage.getItem('gameState');
+        const lastPlayedTimestamp = localStorage.getItem('lastPlayed');
+        var guesses = getGuesses();
+        console.log("guesses from checkGameStatus", guesses);
+
+        if(guesses.length > 0) {
+            console.log("guesses length is greater than 0");
+            guesses.forEach(element => {
+                const guessRow = document.createElement('li');  
+                guessRow.className = "matrix-row"; 
+                console.log(element.songName);
+                displayAttempt(element.songName, guessRow);
+            });
+        }
+
+        if (gameState && lastPlayedTimestamp) {
+            const lastPlayedDate = new Date(parseInt(lastPlayedTimestamp));
+            const currentDate = new Date();
+
+            // Check if the game was last played today
+            if (lastPlayedDate.toDateString() === currentDate.toDateString()) {
+                // The game was played today. Display the previous game state/result.
+                gameOver = true;
+                guesses = getGuesses();
+                displayResult(gameState, guesses); // Implement this function to show the game result
+            } else {
+                // A new day, the user can play again. Clear previous state.
+                localStorage.removeItem('gameState');
+                localStorage.removeItem('lastPlayed');
+                resetGuesses();
+                gameOver = false;
+                return;
+                // game can start
+            }
+        } else {
+            gameOver = false;
+            return;
+        }
+    }
+
+    function displayResult(gameState, guesses) {
+        // Implement this function based on how you want to show results
+        console.log('Displaying result:', gameState);
+    }
+
+    function getGuesses() {
+        // Retrieve and parse the guesses from localStorage
+        return JSON.parse(localStorage.getItem('guesses')) || [];
+    }
+
+    function getTheme() {
+        // Retrieve and parse the guesses from localStorage
+        return JSON.parse(localStorage.getItem('theme')) || [];
+    }
+
+
+    function resetGuesses() {
+        localStorage.removeItem('guesses');
+    }
+
+    function completeReset() {
+        localStorage.clear();
+    }
+
+    function saveGameState(gameState) {
+        // Call this function with the game state when the game finishes
+        const now = new Date();
+        localStorage.setItem('gameState', gameState); // gameState should be a string
+        localStorage.setItem('lastPlayed', now.getTime().toString());
+    }
+
+    function getGuesses() {
+        // Retrieve and parse the guesses from localStorage
+        return JSON.parse(localStorage.getItem('guesses')) || [];
+    }
+
+    function saveGuess(songName, guessNumber) {   //________________________________________________NEED TO FIX GUESSNUMBER
+        // Retrieve existing guesses from localStorage, if any
+        const guesses = JSON.parse(localStorage.getItem('guesses')) || [];
+        
+        // Add the new guess to the array
+        guesses.push({ songName, guessNumber });
+        
+        // Save the updated guesses array back to localStorage
+        localStorage.setItem('guesses', JSON.stringify(guesses));
+    }
 });

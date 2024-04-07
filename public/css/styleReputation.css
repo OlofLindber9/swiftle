@@ -327,6 +327,13 @@ font-size: 30px;
     font-family: 'Karenz';
   }
 
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2; /* Ensures modal content is above the modal-background */
+  }
+
   .modal-content.win {
     box-shadow: 0 0 40px #3f9b4a;
   }
@@ -340,7 +347,7 @@ font-size: 30px;
   }
 
   .modal-image {
-    max-width: 60%;
+    max-width: 100%;
     height: auto;
     display: block;
     margin: auto;

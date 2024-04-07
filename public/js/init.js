@@ -28,7 +28,19 @@ function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
-  function main() {
+function setTheme() {
+  var themeStyle = document.getElementById('theme-style');
+  if (localStorage.getItem('theme')) {
+    theme = localStorage.getItem('theme');
+    themeStyle.setAttribute('href', `/css/style${theme}.css`);
+  } else {
+    theme = localStorage.getItem('theme');
+    themeStyle.setAttribute('href', `/css/styleReputation.css`);;
+  }
+}
+
+function main() {
+  setTheme()
   console.log('main function started');
   try {
     const dateStr = getCurrentDate();

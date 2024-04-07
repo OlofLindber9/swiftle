@@ -377,7 +377,6 @@ h1 {
     flex-direction: column;
     position: relative;
     z-index: 2; /* Ensures modal content is above the modal-background */
-    /* Other styles for modal-body... */
   }
 
   .modal-content.win {

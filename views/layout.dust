@@ -6,7 +6,7 @@
     <title>Swiftle</title>
     <link rel="icon" href="/resources\ColeWordleIconRoundHighlighted.PNG" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link id="theme-style" rel="stylesheet" type="text/css" href="/css/styleLover.css">
+    <link id="theme-style" rel="stylesheet" type="text/css" href="">
 </head>
 <body>
     <div class="game-container">
@@ -18,5 +18,6 @@
     <script src="/js/script.js" defer></script>
     <script src="https://kit.fontawesome.com/b66d6c7a75.js" crossorigin="anonymous"defer></script>
     <script src="/js/theme-switcher.js"defer></script>
+    <!-- <script src="/js/gameStatus.js"defer></script> -->
 <body>
 </html>
