@@ -50,8 +50,11 @@
 <div id="victoryModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content win">
-    <span class="close-button">×</span>
-    <img class="modal-image" src="">
+        <div class="modal-background"></div>
+            <div class="modal-body">
+                <span class="close-button">×</span>
+                <img class="modal-image" src="">
+    </div>
     </div>
 </div>
 
@@ -59,8 +62,11 @@
 <div id="loseModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content lose">
-    <span class="close-button">×</span>
-    <img class="modal-image" src="">
+        <div class="modal-background"></div>
+            <div class="modal-body">
+            <span class="close-button">×</span>
+            <img class="modal-image" src="">
+    </div>
     </div>
 </div>
 

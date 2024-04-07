@@ -63,7 +63,7 @@ document.addEventListener('initComplete', async function() {
 
     async function getCorrectSong(id) {
         try {
-            const response = await fetch(`http://localhost:5500/api/correctSong?id=${encodeURIComponent(id)}`);
+            const response = await fetch(`http://192.168.0.155:5500/api/correctSong?id=${encodeURIComponent(id)}`);
             const song = await response.json();
             return song[0].song;
         } catch (error) {
@@ -97,7 +97,9 @@ document.addEventListener('initComplete', async function() {
             await displayAttempt(guess, guessRow); 
             guessInput.value = '';
             gameOver = true; 
-            victoryModal.style.display = 'block';                    
+            victoryModal.style.display = 'block';  
+            //playGameOverSound();      
+            //_______________________________________________________...Ready For It.mp3 har inte frågetecken?_______________________________________      
             return;
         }
 
@@ -130,7 +132,7 @@ document.addEventListener('initComplete', async function() {
     function displaySongName(guess, songNameCell) {
     
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://localhost:5500/api/name?name=${encodedSongName}`;
+        let url = `http://192.168.0.155:5500/api/name?name=${encodedSongName}`;
     
         fetch(url)
             .then(response => response.json())
@@ -149,10 +151,10 @@ document.addEventListener('initComplete', async function() {
 
         var info;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://localhost:5500/api/album?name=${encodedSongName}`
+        let url = `http://192.168.0.155:5500/api/album?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://localhost:5500/api/album?name=${encodedTargetSongName}`
+        let url2 = `http://192.168.0.155:5500/api/album?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -197,10 +199,10 @@ document.addEventListener('initComplete', async function() {
 
         var info;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://localhost:5500/api/tracknumber?name=${encodedSongName}`
+        let url = `http://192.168.0.155:5500/api/tracknumber?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://localhost:5500/api/tracknumber?name=${encodedTargetSongName}`
+        let url2 = `http://192.168.0.155:5500/api/tracknumber?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -234,10 +236,10 @@ document.addEventListener('initComplete', async function() {
 
         var info;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://localhost:5500/api/length?name=${encodedSongName}`
+        let url = `http://192.168.0.155:5500/api/length?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://localhost:5500/api/length?name=${encodedTargetSongName}`
+        let url2 = `http://192.168.0.155:5500/api/length?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -272,10 +274,10 @@ document.addEventListener('initComplete', async function() {
 
         var info;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://localhost:5500/api/streams?name=${encodedSongName}`
+        let url = `http://192.168.0.155:5500/api/streams?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://localhost:5500/api/streams?name=${encodedTargetSongName}`
+        let url2 = `http://192.168.0.155:5500/api/streams?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -362,7 +364,7 @@ document.addEventListener('initComplete', async function() {
 
     async function checkInput(input){
         let encodedInput = encodeURIComponent(input);
-        let url = `http://localhost:5500/api/count?q=${encodedInput}`;
+        let url = `http://192.168.0.155:5500/api/count?q=${encodedInput}`;
 
         try{
             const response = await fetch(url);
@@ -381,11 +383,11 @@ document.addEventListener('initComplete', async function() {
         let guessData, targetData;
 
         try {
-            let guessResponse = await fetch(`http://localhost:5500/api/songdata?name=${encodeURIComponent(guess)}`);
+            let guessResponse = await fetch(`http://192.168.0.155:5500/api/songdata?name=${encodeURIComponent(guess)}`);
             let guessResult = await guessResponse.json();
             guessData = guessResult[0];
     
-            let targetResponse = await fetch(`http://localhost:5500/api/songdata?name=${encodeURIComponent(targetSong)}`);
+            let targetResponse = await fetch(`http://192.168.0.155:5500/api/songdata?name=${encodeURIComponent(targetSong)}`);
             let targetResult = await targetResponse.json();
             targetData = targetResult[0];
     
@@ -410,5 +412,10 @@ document.addEventListener('initComplete', async function() {
     supportButton.addEventListener('click', function() {
         window.open('https://ko-fi.com/colewordle', '_blank');
     });
+    
+  function playGameOverSound() {
+    var gameOverSound = new Audio(`/resources/Taylor_Swift__Lavender_Haze__sample.mp3`); 
+    gameOverSound.play();
+}
 
 });
