@@ -12,7 +12,7 @@ client.connect((err) => {
     if (err) {
         console.error('connection error', err.stack)
     } else {
-        console.log('db connected')
+        console.log('swiftle db connected')
     }
 })
 module.exports = client;

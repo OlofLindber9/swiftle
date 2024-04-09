@@ -151,7 +151,7 @@ document.addEventListener('initComplete', async function() {
 
     async function getCorrectSong(id) {
         try {
-            const response = await fetch(`http://90.224.206.14:81/api/correctSong?id=${encodeURIComponent(id)}`);
+            const response = await fetch(`http://swiftle.org/api/correctSong?id=${encodeURIComponent(id)}`);
             const song = await response.json();
             correctSong = song[0].song;
         } catch (error) {
@@ -161,7 +161,7 @@ document.addEventListener('initComplete', async function() {
 
     async function getCorrectSongAlbumCover(correctSong) {
         try {
-            const response = await fetch(`http://90.224.206.14:81/api/album?name=${encodeURIComponent(correctSong)}`);
+            const response = await fetch(`http://swiftle.org/api/album?name=${encodeURIComponent(correctSong)}`);
             const albumCover = await response.json();
             correctSongAlbumCover = albumCover[0].album;
         } catch (error) {

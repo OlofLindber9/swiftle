@@ -14,7 +14,7 @@ document.addEventListener('initComplete', (event) => {
             return;
         }
     
-        let url = `http://90.224.206.14:81/api/suggestions?partial=${encodeURIComponent(partialName)}`;
+        let url = `http://swiftle.org/api/suggestions?partial=${encodeURIComponent(partialName)}`;
         fetch(url)
             .then(response => response.json())
             .then(suggestions => {
