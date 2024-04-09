@@ -3,6 +3,8 @@ document.addEventListener('initComplete', async function() {
     var victoryModalcloseButton = document.getElementsByClassName('close-button')[0];
     var loseModalcloseButton = document.getElementsByClassName('close-button')[1];
     var rulesModalcloseButton = document.getElementsByClassName('close-button')[2];
+    var victoryShareButton = document.getElementsByClassName('share-button')[0];
+    var loseShareButton = document.getElementsByClassName('share-button')[1];
     var victoryModal = document.getElementById('victoryModal'); 
     var loseModal = document.getElementById('loseModal');
     var rulesModal = document.getElementById('rulesModal');
@@ -11,10 +13,8 @@ document.addEventListener('initComplete', async function() {
     var rulesModalContent = rulesModal.querySelector('.modal-content');
     var victoryModalImage = victoryModal.querySelector('.modal-image');
     var loseModalImage = loseModal.querySelector('.modal-image');
-    console.log('HELLO');
     var correctSong;
     var correctSongAlbumCover;
-    console.log(window.correctSongId);
     var id = window.correctSongId;
     await getCorrectSong(id);
     await getCorrectSongAlbumCover(correctSong);
@@ -74,6 +74,31 @@ document.addEventListener('initComplete', async function() {
             victoryModal.style.display = 'none';
         }
     };
+
+    victoryShareButton.onclick = function() {
+        // Retrieve the guesses from localStorage or however they are stored
+        const guesses = JSON.parse(localStorage.getItem('guesses')) || [];
+        console.log("we SHARE");
+
+        // Format the guesses into a message
+        let message = `Swiftle #001\n\n`;
+        guesses.forEach((guess, index) => {
+            var emoji;
+            if (index === guesses.length - 1) {
+                emoji = '✅';
+            }else { 
+                emoji = '⬜️';
+            }
+            message += `${emoji}`;          //__________________________________________ADD LINK TO SWIFTLE_________________________________________
+        });
+
+        // Copy the message to the clipboard
+        navigator.clipboard.writeText(message).then(() => {
+            console.log('Results copied to clipboard');
+        }).catch(err => {
+            console.error('Failed to copy results to clipboard: ', err);
+        });
+    };
     
     // When the user clicks on (x), close the modal
     loseModalcloseButton.onclick = function() {
@@ -85,6 +110,31 @@ document.addEventListener('initComplete', async function() {
         if (event.target === loseModal) {
             loseModal.style.display = 'none';
         }
+    };
+
+    loseShareButton.onclick = function() {
+        // Retrieve the guesses from localStorage or however they are stored
+        const guesses = JSON.parse(localStorage.getItem('guesses')) || [];
+        console.log("we SHARE");
+
+        // Format the guesses into a message
+        let message = `Swiftle #001\n\n`;
+        guesses.forEach((guess, index) => {
+            var emoji;
+            if (index === guesses.length - 1) {
+                emoji = '❌';
+            }else { 
+                emoji = '⬜️';
+            }
+            message += `${emoji}`;          //__________________________________________ADD LINK TO SWIFTLE_________________________________________
+        });
+
+        // Copy the message to the clipboard
+        navigator.clipboard.writeText(message).then(() => {
+            console.log('Results copied to clipboard');
+        }).catch(err => {
+            console.error('Failed to copy results to clipboard: ', err);
+        });
     };
 
     // When the user clicks on (x), close the modal

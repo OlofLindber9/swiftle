@@ -3,7 +3,6 @@ var express = require('express'),
     bodyparser = require('body-parser'),
     cons = require('consolidate'),
     dust = require('dustjs-helpers'),
-    pg = require('pg'),
     app = express();
 
 
@@ -181,3 +180,5 @@ app.get('/api/correctSong', async (req, res) => {
         res.status(500).send('Error fetching data');
     }
 });
+
+module.exports = app;

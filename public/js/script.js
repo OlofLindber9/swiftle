@@ -57,7 +57,7 @@ document.addEventListener('initComplete', async function() {
     songStreamsheader.textContent = 'Streams'
     headerRow.appendChild(songStreamsheader); 
     //resetGuesses();
-    //completeReset();
+    completeReset();
     checkGameStatus();
 
 
@@ -115,7 +115,8 @@ document.addEventListener('initComplete', async function() {
                 await displayAttempt(guess, guessRow);   
             }
             loseModal.style.display = 'block';
-            saveGameState('lose');   
+            saveGameState('lose'); 
+            playGameOverSound(targetSong);  
             return;
         }
 

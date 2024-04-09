@@ -25,6 +25,16 @@ function FalsePromise(err, data) {
 }
 
 /**
+  * A naive function factory that adds a thenable that resolves to the given value.
+  * @param resolvesTo {*} The value passed to the `resolve` then argument
+*/
+function createThenableFunction(resolvesTo) {
+  var fn = function () {};
+  fn.then = function (res) { res(resolvesTo) };
+  return fn;
+}
+
+/**
  * A naive Stream constructor that streams the provided array asynchronously
  * @param arr {Array<Object|Error>|String} items to be streamed
  * @return {Stream}
@@ -44,7 +54,7 @@ function DreamStream(arr) {
       });
       push(null, highland.nil);
     });
-  }
+  };
 }
 
 return [
@@ -57,7 +67,7 @@ return [
       {
         name:     "streaming render",
         source:   "{#stream}{#delay}{.}{/delay}{/stream}",
-        context:  (function(){
+        context:  function(){
                     var d = 1;
                     return {
                       stream: function() {
@@ -71,7 +81,7 @@ return [
                         });
                       }
                     };
-                  }),
+                  },
         expected: '',
         message: "should test the stream rendering"
       },
@@ -106,7 +116,7 @@ return [
          context:  { "helper": function(chunk, context, bodies, params)
                     {
                       // top of the current stack
-                      currentTemplateName = context.getTemplateName();
+                      var currentTemplateName = context.getTemplateName();
                       return chunk.write(currentTemplateName);
                     }
                    },
@@ -178,7 +188,7 @@ return [
         name:     "functions in context",
         source:   "Hello {type} World!",
         context:  {
-                    type: function(chunk) {
+                    type: function() {
                       return "Sync";
                     }
                   },
@@ -251,6 +261,18 @@ return [
         expected: "hi",
         message: "should setup base template for next test. hi should not be part of base block name"
 
+      },
+      {
+        name:     "{?exists} supports promises and uses correct context",
+        source:   "{#a}{?b}{test}{/b}{/a}",
+        context:  {
+          a: {
+            b: FalsePromise(null, { test: "BAD" }),
+            test: "GOOD"
+          }
+        },
+        expected: "GOOD",
+        message:  "{?exists} supports promises and uses correct context",      
       },
       {
         name:     "issue322 use base template picks up prefix chunk data",
@@ -573,6 +595,13 @@ return [
         context:   {"array": []},
         expected: "false",
         message:  "empty array is treated as empty in exists"
+      },
+      {
+        name:     "empty array resolved from a Promise is treated as empty in exists",
+        source:   "{?emptyArrayFromPromise}true{:else}false{/emptyArrayFromPromise}",
+        context:   {"emptyArrayFromPromise": FalsePromise(null, [])},
+        expected: "false",
+        message:  "empty array resolved from a Promise is treated as empty in exists"
       },
       {
         name:     "empty {} is treated as non empty in exists",
@@ -914,6 +943,20 @@ return [
 		expected: "Eventually magic!",
 		message: "should reserve an async section for a thenable returned from a function"
 	  },
+    {
+      name:     "thenable section from thenable function",
+  		source:   "{#thenable}Eventually poof!{/thenable}",
+  		context: { "thenable": createThenableFunction("poof!") },
+  		expected: "Eventually poof!",
+  		message: "should reserve an async section for a thenable function"
+    },
+    {
+      name:     "thenable reference from thenable function",
+  		source:   "A {thenable} thing",
+  		context: { "thenable": createThenableFunction("real") },
+  		expected: "A real thing",
+  		message: "should reserve an async reference for a thenable function"
+    },
 	  {
 		name:     "thenable deep section",
 		source:   "Eventually my {#magic.ally}{delicious}{/magic.ally} will come",
@@ -1360,7 +1403,7 @@ return [
 	  {
 		name:	  "partial with async ref as name",
 		source:   '{>"{ref}" /}',
-		context:  { ref: function(chunk, context) { return chunk.map(function(chunk) { setTimeout(function() { chunk.end('hello_world'); }, 0) }); }},
+		context:  { ref: function(chunk, context) { return chunk.map(function(chunk) { setTimeout(function() { chunk.end('hello_world'); }, 0); }); }},
 		expected: "Hello World!",
 		message:  "should test partial with an asynchronously-resolved template name"
 	  },
@@ -1486,7 +1529,7 @@ return [
         source:   '{>partial_print_name/}',
         context:  { "helper": function(chunk, context, bodies, params)
                       {
-                        currentTemplateName = context.getTemplateName();
+                        var currentTemplateName = context.getTemplateName();
                         return chunk.write(currentTemplateName);
                       }
                   },
@@ -1498,7 +1541,7 @@ return [
         source:   '{>"{partial_print_name}"/}',
         context:  { "helper": function(chunk, context, bodies, params)
                       {
-                        currentTemplateName = context.getTemplateName();
+                        var currentTemplateName = context.getTemplateName();
                         return chunk.write(currentTemplateName);
                       },
                     "partial_print_name" : "partial prints the current template name"
@@ -1511,7 +1554,7 @@ return [
         source:   '{>nested_partial_print_name/}',
         context:  { "helper": function(chunk, context, bodies, params)
                         {
-                          currentTemplateName = context.getTemplateName();
+                          var currentTemplateName = context.getTemplateName();
                           return chunk.write(currentTemplateName);
                         }
                     },
@@ -1562,7 +1605,7 @@ return [
           '{>partialTl:contextDoesNotExist/}'
         ].join('\n'),
         context: {
-          loadPartialTl : function(chunk, context, bodies, params) {
+          loadPartialTl: function(chunk) {
             dust.loadSource(dust.compile('{.value}{.value.childValue.anotherChild}{name.nested}{$idx} ', 'partialTl'));
             return chunk;
           }
@@ -1782,7 +1825,7 @@ return [
         name:     "error: whitespaces between the opening brace and any of (#,?,@,^,+,%) is not allowed",
         source:   '{ # helper foo="bar" boo="boo" } {/helper}',
         context:  { "helper": function(chunk, context, bodies, params) { return chunk.write(params.boo + " " + params.foo); } },
-        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found. At line : 1, column : 1',
+        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found.',
         message: "should show an error for whitespces between the opening brace and any of (#,?,@,^,+,%)"
       },
       {
@@ -1793,10 +1836,10 @@ return [
         message: "should ignore extra whitespaces between the closing brace plus slash and the tag identifier"
       },
       {
-        name:     "error: whitespaces between the openning curly brace and forward slash in the closing tags not supported",
+        name:     "error: whitespaces between the opening curly brace and forward slash in the closing tags not supported",
         source:   '{# helper foo="bar" boo="boo"} { / helper }',
         context:  { "helper": function(chunk, context, bodies, params) { return chunk.write(params.boo + " " + params.foo); } },
-        error:    'Expected end tag for helper but it was not found. At line : 1, column : 32',
+        error:    'Expected end tag for helper but it was not found.',
         message: "should show an error because whitespaces between the '{' and the forward slash are not allowed in the closing tags"
       },
       {
@@ -1810,7 +1853,7 @@ return [
         name:     "error: whitespaces between the forward slash and the closing brace in self closing tags",
         source:   '{#helper foo="bar" boo="boo" / }',
         context:  { "helper": function(chunk, context, bodies, params) { return chunk.write(params.boo + " " + params.foo); } },
-        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found. At line : 1, column : 1',
+        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found.',
         message: "should show an error for whitespaces  etween the forward slash and the closing brace in self closing tags"
       },
       {
@@ -1824,7 +1867,7 @@ return [
         name: "error : whitespaces between the '{' plus '>' and partial identifier is not supported",
         source: '{ > partial/} {> "hello_world"/} {> "{ref}"/}',
         context: { "name": "Jim", "count": 42, "ref": "hello_world" },
-        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found. At line : 1, column : 1',
+        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found.',
         message: "should show an error for whitespaces between the '{' plus '>' and partial identifier"
       },
       {
@@ -1924,7 +1967,7 @@ return [
         name: "Dust syntax error",
         source: "RRR {##}",
         context: { name: "Mick", count: 30 },
-        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found. At line : 1, column : 5',
+        error: 'Expected buffer, comment, end of input, partial, raw, reference, section or special but "{" found.',
         message: "should test that the error message shows line and column."
       },
       {
@@ -1933,7 +1976,7 @@ return [
                 "{#&2}",
                 "{/s}"].join("\n"),
         context: {},
-        error: 'Expected end tag for s but it was not found. At line : 2, column : 1',
+        error: 'Expected end tag for s but it was not found.',
         message: "should test the errors message for section with error."
       },
       {
@@ -1946,7 +1989,7 @@ return [
                 "buffer",
                 "{/s}"].join("\n"),
         context: {},
-        error: 'Expected end tag for s but it was not found. At line : 4, column : 1',
+        error: 'Expected end tag for s but it was not found.',
         message: "should test the errors message for section with a buffer and error inside."
       },
       {
@@ -1957,7 +2000,7 @@ return [
                 "a second",
                 "buffer"].join("\n"),
         context: {},
-        error: 'Expected end tag for s but it was not found. At line : 5, column : 7',
+        error: 'Expected end tag for s but it was not found.',
         message: "should test the errors message for section without end tag shows."
       },
       {
@@ -1969,7 +2012,7 @@ return [
                 "default header ",
                 "{/header}"].join("\n"),
         context: {},
-        error: 'Expected end tag for header but it was not found. At line : 4, column : 5',
+        error: 'Expected end tag for header but it was not found.',
         message: "should test the errors message for partials with a buffer inside."
       },
       {
@@ -1980,7 +2023,7 @@ return [
                 "a second",
                 "buffer"].join("\n"),
         context: {},
-        error: 'Expected end tag for header but it was not found. At line : 5, column : 7',
+        error: 'Expected end tag for header but it was not found.',
         message: "should test the errors message for partial without end tag."
       },
       {
@@ -1992,7 +2035,7 @@ return [
                 "false",
                 "{/scalar}"].join("\n"),
         context: {},
-        error: 'Expected end tag for scalar but it was not found. At line : 3, column : 2',
+        error: 'Expected end tag for scalar but it was not found.',
         message: "should test the errors message for Scalar."
       },
       {
@@ -2004,7 +2047,7 @@ return [
                 " {#@#fger}",
                 "{/scalar}"].join("\n"),
         context: {},
-        error: 'Expected end tag for scalar but it was not found. At line : 5, column : 2',
+        error: 'Expected end tag for scalar but it was not found.',
         message: "should test the errors message for Scalar."
       },
       {
@@ -2019,7 +2062,7 @@ return [
                   "No Tags!",
                 "{/tags}"].join("\n"),
         context: {},
-        error: 'Expected end tag for tags but it was not found. At line : 4, column : 5',
+        error: 'Expected end tag for tags but it was not found.',
         message: "should test the errors message for Conditionals."
       },
       {
@@ -2035,7 +2078,7 @@ return [
                   "No Tags!",
                 "{/tags}"].join("\n"),
         context: {},
-        error: 'Expected end tag for tags but it was not found. At line : 8, column : 1',
+        error: 'Expected end tag for tags but it was not found.',
         message: "should test the errors message for Conditional's else."
       },
       {
@@ -2049,7 +2092,7 @@ return [
                 "{:else}",
                   "No Tags!"].join("\n"),
         context: {},
-        error: 'Expected end tag for tags but it was not found. At line : 8, column : 9',
+        error: 'Expected end tag for tags but it was not found.',
         message: "should test the errors message for Conditional without end tag."
       },
       {
@@ -2062,7 +2105,7 @@ return [
       {
         name: "Helper syntax error. async TypeError",
         source:"{#hello/}",
-        context: {"hello":function(chunk, context, bodies, params) { return chunk.map(function(chunk) { var a; a.slice(1); chunk.end(); })}},
+        context: {"hello":function(chunk, context, bodies, params) { return chunk.map(function(chunk) { var a; a.slice(1); chunk.end(); }); }},
         error: "undefined",
         message: "should test helper syntax errors inside an async block being handled gracefully"
        }
