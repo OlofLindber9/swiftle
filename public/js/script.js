@@ -63,7 +63,7 @@ document.addEventListener('initComplete', async function() {
 
     async function getCorrectSong(id) {
         try {
-            const response = await fetch(`http://swiftle.org/api/correctSong?id=${encodeURIComponent(id)}`);
+            const response = await fetch(`https://swiftle.org/api/correctSong?id=${encodeURIComponent(id)}`);
             const song = await response.json();
             return song[0].song;
         } catch (error) {
@@ -98,7 +98,7 @@ document.addEventListener('initComplete', async function() {
             guessInput.value = '';
             gameOver = true; 
             victoryModal.style.display = 'block';  
-            playGameOverSound(targetSong);
+            //playGameOverSound(targetSong);
             saveGameState('win');   
             saveGuess(guess, numberOfAttempts);        
             return;
@@ -137,7 +137,7 @@ document.addEventListener('initComplete', async function() {
     function displaySongName(guess, songNameCell) {
     
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://swiftle.org/api/name?name=${encodedSongName}`;
+        let url = `https://swiftle.org/api/name?name=${encodedSongName}`;
     
         fetch(url)
             .then(response => response.json())
@@ -159,10 +159,10 @@ document.addEventListener('initComplete', async function() {
         let guessAlbum; 
 
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://swiftle.org/api/album?name=${encodedSongName}`
+        let url = `https://swiftle.org/api/album?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://swiftle.org/api/album?name=${encodedTargetSongName}`
+        let url2 = `https://swiftle.org/api/album?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -207,10 +207,10 @@ document.addEventListener('initComplete', async function() {
         var info;
         let guessTrackNumber;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://swiftle.org/api/tracknumber?name=${encodedSongName}`
+        let url = `https://swiftle.org/api/tracknumber?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://swiftle.org/api/tracknumber?name=${encodedTargetSongName}`
+        let url2 = `https://swiftle.org/api/tracknumber?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -245,10 +245,10 @@ document.addEventListener('initComplete', async function() {
         var info;
         let guessLength;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://swiftle.org/api/length?name=${encodedSongName}`
+        let url = `https://swiftle.org/api/length?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://swiftle.org/api/length?name=${encodedTargetSongName}`
+        let url2 = `https://swiftle.org/api/length?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -284,10 +284,10 @@ document.addEventListener('initComplete', async function() {
         var info;
         let guessStreams;
         let encodedSongName = encodeURIComponent(guess);
-        let url = `http://swiftle.org/api/streams?name=${encodedSongName}`
+        let url = `https://swiftle.org/api/streams?name=${encodedSongName}`
 
         let encodedTargetSongName = encodeURIComponent(targetSong);
-        let url2 = `http://swiftle.org/api/streams?name=${encodedTargetSongName}`
+        let url2 = `https://swiftle.org/api/streams?name=${encodedTargetSongName}`
 
         fetch(url)
         .then(response => response.json())
@@ -374,7 +374,7 @@ document.addEventListener('initComplete', async function() {
 
     async function checkInput(input){
         let encodedInput = encodeURIComponent(input);
-        let url = `http://swiftle.org/api/count?q=${encodedInput}`;
+        let url = `https://swiftle.org/api/count?q=${encodedInput}`;
 
         try{
             const response = await fetch(url);
@@ -393,11 +393,11 @@ document.addEventListener('initComplete', async function() {
         let guessData, targetData;
 
         try {
-            let guessResponse = await fetch(`http://swiftle.org/api/songdata?name=${encodeURIComponent(guess)}`);
+            let guessResponse = await fetch(`https://swiftle.org/api/songdata?name=${encodeURIComponent(guess)}`);
             let guessResult = await guessResponse.json();
             guessData = guessResult[0];
     
-            let targetResponse = await fetch(`http://swiftle.org/api/songdata?name=${encodeURIComponent(targetSong)}`);
+            let targetResponse = await fetch(`https://swiftle.org/api/songdata?name=${encodeURIComponent(targetSong)}`);
             let targetResult = await targetResponse.json();
             targetData = targetResult[0];
     

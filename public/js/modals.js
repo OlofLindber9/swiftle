@@ -89,7 +89,8 @@ document.addEventListener('initComplete', async function() {
             }else { 
                 emoji = '⬜️';
             }
-            message += `${emoji}`;          //__________________________________________ADD LINK TO SWIFTLE_________________________________________
+            message += `${emoji}`;
+            message += '\n https://swiftle.org/'; 
         });
 
         // Copy the message to the clipboard
@@ -98,6 +99,20 @@ document.addEventListener('initComplete', async function() {
         }).catch(err => {
             console.error('Failed to copy results to clipboard: ', err);
         });
+
+        var notificationBox = document.getElementById('copyNotification');
+
+        // Apply the fadeInOut animation to the notification box
+        notificationBox.style.animation = 'fadeInOut 2s';
+      
+        // Make the notification box visible
+        notificationBox.style.display = 'block';
+      
+        // After 2 seconds, hide the notification box again
+        setTimeout(function() {
+          notificationBox.style.display = 'none';
+          notificationBox.style.animation = ''; // Reset the animation
+        }, 2000);
     };
     
     // When the user clicks on (x), close the modal
@@ -126,7 +141,8 @@ document.addEventListener('initComplete', async function() {
             }else { 
                 emoji = '⬜️';
             }
-            message += `${emoji}`;          //__________________________________________ADD LINK TO SWIFTLE_________________________________________
+            message += `${emoji}`;
+            message += '\n https://swiftle.org/';
         });
 
         // Copy the message to the clipboard
@@ -135,6 +151,20 @@ document.addEventListener('initComplete', async function() {
         }).catch(err => {
             console.error('Failed to copy results to clipboard: ', err);
         });
+
+        var notificationBox = document.getElementById('copyNotification');
+
+        // Apply the fadeInOut animation to the notification box
+        notificationBox.style.animation = 'fadeInOut 2s';
+      
+        // Make the notification box visible
+        notificationBox.style.display = 'block';
+      
+        // After 2 seconds, hide the notification box again
+        setTimeout(function() {
+          notificationBox.style.display = 'none';
+          notificationBox.style.animation = ''; // Reset the animation
+        }, 2000);
     };
 
     // When the user clicks on (x), close the modal
@@ -151,7 +181,7 @@ document.addEventListener('initComplete', async function() {
 
     async function getCorrectSong(id) {
         try {
-            const response = await fetch(`http://swiftle.org/api/correctSong?id=${encodeURIComponent(id)}`);
+            const response = await fetch(`https://swiftle.org/api/correctSong?id=${encodeURIComponent(id)}`);
             const song = await response.json();
             correctSong = song[0].song;
         } catch (error) {
@@ -161,7 +191,7 @@ document.addEventListener('initComplete', async function() {
 
     async function getCorrectSongAlbumCover(correctSong) {
         try {
-            const response = await fetch(`http://swiftle.org/api/album?name=${encodeURIComponent(correctSong)}`);
+            const response = await fetch(`https://swiftle.org/api/album?name=${encodeURIComponent(correctSong)}`);
             const albumCover = await response.json();
             correctSongAlbumCover = albumCover[0].album;
         } catch (error) {

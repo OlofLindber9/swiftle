@@ -1,3 +1,4 @@
+/*___________________________________________________________________________GENERAL__________________________________________________________________________*/
 @font-face {
     font-family: 'OldeEnglish';
     src: url('../fonts/OldeEnglish.ttf') format('trueType');
@@ -62,91 +63,14 @@ body::before {
     transition: all ease 0.3s;
 }
 
-.game-container {
-    text-align: center;
-    background-color: transparent;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.guess-input, .btn-primary {
-    margin: 20px 0;
-    width: 100%;
-    background-color: transparent;
-    font-size: 18px;
-    border-bottom: 1px solid #000000;
-}
-
-#guess-input {
-    flex-grow: 1;
-}
-
-#submit-guess {
-    background-color: transparent;
-    color: rgb(0, 0, 0);
-    font-family: 'Karenz'; 
-    padding: 10px 20px;
-    font-size: 18px;
-    border-bottom: 2px solid #000000;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-
-#submit-guess:hover {
-    background-color: #272624;
-    border-color: #272624;
-    color: rgb(255, 255, 255);
-}
-
-.past-guesses {
-    list-style-type: none;
-    padding: 0;
-}
-
-.past-guesses li {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
 
 h1 {
     color: whitesmoke
 }
 
-.guessesMatrix{
-  max-height: 40vh;
-  overflow-y: auto;
-}
 
-.guessesMatrix::-webkit-scrollbar-track {
-  background: #ffffff; /* Track color */
-  border-radius: 10px;
-}
-
-.guessesMatrix::-webkit-scrollbar-thumb {
-  background: #000000; /* Thumb color */
-  border-radius: 10px;
-}
-
-.guessesMatrix::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Thumb hover color */
-}
-
-.guessesMatrix::-webkit-scrollbar {
-  width: 8px; /* Scrollbar width */
-}
-
-
+/*___________________________________________________________________________SUGGESTIONS__________________________________________________________________________*/
 .suggestion-box {
     background-color: rgb(0, 0, 0);
     position: absolute;
@@ -190,6 +114,85 @@ h1 {
 
 .suggestion-item.selected {
     background-color: #ffffff;
+}
+/*___________________________________________________________________________ATTEMPTS__________________________________________________________________________*/
+.guessesMatrix{
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.guessesMatrix::-webkit-scrollbar-track {
+  background: #ffffff; /* Track color */
+  border-radius: 10px;
+}
+
+.guessesMatrix::-webkit-scrollbar-thumb {
+  background: #000000; /* Thumb color */
+  border-radius: 10px;
+}
+
+.guessesMatrix::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Thumb hover color */
+}
+
+.guessesMatrix::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
+}
+
+.game-container {
+  text-align: center;
+  background-color: transparent;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guess-input, .btn-primary {
+  margin: 20px 0;
+  width: 100%;
+  background-color: transparent;
+  font-size: 18px;
+  border-bottom: 1px solid #000000;
+}
+
+#guess-input {
+  flex-grow: 1;
+}
+
+#submit-guess {
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  font-family: 'Karenz'; 
+  padding: 10px 20px;
+  font-size: 18px;
+  border-bottom: 2px solid #000000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+#submit-guess:hover {
+  background-color: #272624;
+  border-color: #272624;
+  color: rgb(255, 255, 255);
+}
+
+.past-guesses {
+  list-style-type: none;
+  padding: 0;
+}
+
+.past-guesses li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-area {
@@ -292,6 +295,7 @@ font-size: 30px;
     font-style: normal;
 }
 
+/*___________________________________________________________________________MODALS__________________________________________________________________________*/
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -330,6 +334,8 @@ font-size: 30px;
   .modal-body {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
     z-index: 2; /* Ensures modal content is above the modal-background */
   }
@@ -367,6 +373,31 @@ font-size: 30px;
     text-decoration: none;
     cursor: pointer;
   }
+
+  .share-button{
+    margin-top: 3%;
+    max-width: 70%;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    font-size: 24px;
+    font-family: 'Karenz';
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    border-bottom: 1px solid #ffffff;
+    transition: all ease 0.3s;
+  }
+
+  .share-button:hover{
+    background-color: #525252;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border-bottom: 1px solid #000000
+  }
+
   
   /* Add Animation */
   @keyframes fadeIn {
@@ -379,6 +410,38 @@ font-size: 30px;
     to {top: 50%; opacity: 1;}
   }
 
+  .copy-notification {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: #000;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    z-index: 10;
+    animation-fill-mode: forwards; /* Keeps the state of the last animation frame after the animation finishes */
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      display: block; /* Make it visible */
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none; /* Hide it again */
+    }
+  }
+  
+/*___________________________________________________________________________BUTTONS__________________________________________________________________________*/
   .rules-button{
     background-color: transparent;
     color: rgb(0, 0, 0);
