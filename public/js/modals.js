@@ -1,5 +1,6 @@
 document.addEventListener('initComplete', async function() {
 
+    var gameID = daysSinceStart();
     var victoryModalcloseButton = document.getElementsByClassName('close-button')[0];
     var loseModalcloseButton = document.getElementsByClassName('close-button')[1];
     var rulesModalcloseButton = document.getElementsByClassName('close-button')[2];
@@ -81,7 +82,7 @@ document.addEventListener('initComplete', async function() {
         console.log("we SHARE");
 
         // Format the guesses into a message
-        let message = `Swiftle #001\n\n`;
+        let message = `Swiftle #${gameID}\n\n`;
         guesses.forEach((guess, index) => {
             var emoji;
             if (index === guesses.length - 1) {
@@ -90,8 +91,8 @@ document.addEventListener('initComplete', async function() {
                 emoji = '⬜️';
             }
             message += `${emoji}`;
-            message += '\n https://swiftle.org/'; 
         });
+        message += '\n https://swiftle.org/'; 
 
         // Copy the message to the clipboard
         navigator.clipboard.writeText(message).then(() => {
@@ -197,6 +198,23 @@ document.addEventListener('initComplete', async function() {
         } catch (error) {
             console.error('Error:', error);
         }
+    }
+
+    function daysSinceStart() {
+        const currentDate = getCurrentDate();
+        const startDate = new Date('2024-04-03'); //____________________SET START DATE____________________
+        const currentTime = new Date(currentDate);
+        const timeDifference = currentTime - startDate;
+        const daysDifference = timeDifference / (1000 * 3600 * 24);
+        return Math.floor(daysDifference);
+      }
+
+    function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
     }
 
 });

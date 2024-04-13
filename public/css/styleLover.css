@@ -1,14 +1,11 @@
 /*___________________________________________________________________________GENERAL__________________________________________________________________________*/
 :root {
-  --bg: #080B12;
-  --text: #CFB3E6;
-  --border-grd1: #6C6499;
-  --border-grd2: #111222;
-  --card-grd1: #1F193D;
-  --card-grd2: #05060D;
-  --radial-center: rgba(173,155,255,0.3);
-  --radial-edge: rgba(11,12,22,0.3);
-  --shadow: rgba(173,155,255,0.5);
+  --card-grd1: #ffafd6;
+  --card-grd2: #6e4358;
+
+  /*--card-grd1: #86387c;
+  --card-grd2: #0d0506;       da6090*/
+  --text: #582552;
 }
 
 @font-face {
@@ -40,7 +37,7 @@ body {
     margin-right: auto;
     margin-top: 1vw;
     margin-bottom: 1vw;
-    color: #D3437D;
+    color: var(--text);
     text-align: center;
     border: transparent;
     border-radius: 30px;
@@ -88,7 +85,7 @@ h1 {
 }
 
 .suggestion-box::-webkit-scrollbar-track {
-    background: #D3437D; /* Track color */
+    background: var(--text); /* Track color */
     border-radius: 10px;
 }
 
@@ -111,12 +108,14 @@ h1 {
 
 .suggestion-item:hover{
     color: #faecbe;
-    background-color: #D3437D;
+    background-color: var(--text);
     box-shadow: inset 0 0 10px rgb(34, 33, 33); 
 }
 
 .suggestion-item.selected {
-    background-color: #a09e9a;
+  color: #faecbe;
+  background-color: var(--text);
+  box-shadow: inset 0 0 10px rgb(34, 33, 33); 
 }
 /*___________________________________________________________________________ATTEMPTS__________________________________________________________________________*/
 .game-container {
@@ -129,7 +128,7 @@ h1 {
 .guess-input, .btn-primary {
   margin: 20px 0;
   width: 100%;
-  background-color: #d3437d;
+  background-color: var(--text);
   border-radius: 20px;
 }
 
@@ -138,7 +137,7 @@ h1 {
 }
 
 #submit-guess {
-  background-color: #D3437D;
+  background-color: var(--text);
   color: #faecbe;
   border-radius: 20px;
   font-family: 'soulmate'; 
@@ -152,7 +151,7 @@ h1 {
 
 #submit-guess:hover {
   background-color: #faecbe;
-  color: #d3437d;
+  color: var(--text);
 }
 
 .past-guesses {
@@ -172,7 +171,7 @@ overflow-y: auto;
 }
 
 .guessesMatrix::-webkit-scrollbar-track {
-background: #D3437D; /* Track color */
+background: var(--text); /* Track color */
 border-radius: 10px;
 }
 
@@ -273,7 +272,7 @@ width: 8px; /* Scrollbar width */
 .header-matrixlabel{
     backdrop-filter: blur(10px);
     background-color: rgba(240, 171, 194, 0.507);
-    color: #d3437d;
+    color: var(--text);
     text-align: center;
     font-size: 24px;
     font-family: 'soulmate';
@@ -346,7 +345,7 @@ width: 8px; /* Scrollbar width */
     background-size: cover;
     backdrop-filter: blur(20px);
     padding: 20px;
-    border: 1px solid #D3437D;
+    border: 1px solid var(--text);
     border-radius: 30px;
     width: 50%;
     animation-name: slideIn;
@@ -418,7 +417,7 @@ width: 8px; /* Scrollbar width */
   .share-button{
     margin-top: 3%;
     max-width: 70%;
-    background-color: #D3437D;
+    background-color: var(--text);
     color: #faecbe;
     padding: 10px 20px;
     font-size: 24px;
@@ -436,7 +435,7 @@ width: 8px; /* Scrollbar width */
 
   .share-button:hover{
     background-color: #faecbe;
-    color: #D3437D;
+    color: var(--text);
     text-decoration: none;
     cursor: pointer;
   }
@@ -487,7 +486,7 @@ width: 8px; /* Scrollbar width */
   .rules-button{
     backdrop-filter: blur(10px);
     background-color: rgba(240, 171, 194, 0.507);
-    color: #D3437D;
+    color: var(--text);
     padding: 10px 20px;
     font-size: 24px;
     font-family: 'soulmate';
@@ -527,18 +526,19 @@ width: 8px; /* Scrollbar width */
   }
 
   .rules-button:hover{
-    background-color: #D3437D;
+    background-color: var(--text);
     color: #faecbe;
     text-decoration: none;
     cursor: pointer;
   }
 
   .rules-list{
-    color: #faecbe;
-    font-family: 'soulmate';
+    color: #f5f5f5;
+    font-family: 'sans-serif';
     list-style-type: none;
     list-style-type: disc;
     padding-left: 40px;
+    z-index: 2;
   }
 
   .rules-list li {
@@ -548,7 +548,7 @@ width: 8px; /* Scrollbar width */
   }
 
   .rule-purpose-message{
-    color: #f5f5f5;
+    color: #faecbe;
     font-family: 'soulmate';
     font-size: 20px;
     margin-bottom: 40px;
@@ -572,7 +572,7 @@ width: 8px; /* Scrollbar width */
     overflow: hidden;
     backdrop-filter: blur(10px);
     background-color: rgba(240, 171, 194, 0.507);
-    color: #D3437D;
+    color: var(--text);
     border: 1px solid #31302e; 
     padding: 10px 20px;
     font-size: 24px;
@@ -611,7 +611,7 @@ width: 8px; /* Scrollbar width */
   }
 
   .support-button:hover{
-    background-color: #D3437D;
+    background-color: var(--text);
     color: #faecbe;
     text-decoration: none;
     cursor: pointer;
@@ -621,7 +621,7 @@ width: 8px; /* Scrollbar width */
     overflow: hidden;
     backdrop-filter: blur(10px);
     background-color: rgba(240, 171, 194, 0.507);
-    color: #D3437D;
+    color: var(--text);
     padding: 10px 20px;
     font-size: 24px;
     font-family: 'soulmate';
@@ -660,7 +660,7 @@ width: 8px; /* Scrollbar width */
   }
 
   .theme-button:hover {
-    background-color: #D3437D;
+    background-color: var(--text);
     color: #faecbe;
     text-decoration: none;
     cursor: pointer;

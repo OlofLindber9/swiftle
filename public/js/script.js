@@ -1,3 +1,5 @@
+import { setKanyeTheme } from './theme-switcher.js';
+
 document.addEventListener('initComplete', async function() {
 
     const targetSong = await getCorrectSong(window.correctSongId);
@@ -79,6 +81,12 @@ document.addEventListener('initComplete', async function() {
         }
         
         const guess = guessInput.value;
+
+        if(guess === 'kanye' || guess === 'Kanye' || guess === 'Kanye West' || guess === 'kanye west' 
+        || guess === 'Kanye West' || guess === 'kanye west' || guess === 'ye') {
+            setKanyeTheme();
+            return;
+        }
         
         var validInput = await checkInput(guess);
         if (guess.length === 1){
@@ -98,7 +106,7 @@ document.addEventListener('initComplete', async function() {
             guessInput.value = '';
             gameOver = true; 
             victoryModal.style.display = 'block';  
-            //playGameOverSound(targetSong);
+            playGameOverSound(targetSong);
             saveGameState('win');   
             saveGuess(guess, numberOfAttempts);        
             return;

@@ -13,6 +13,12 @@ document.addEventListener('initComplete', (event) => {
             suggestionBox.style.display = 'none';
             return;
         }
+
+        if (partialName.length < 2) {
+            suggestionBox.innerHTML = '';
+            suggestionBox.style.display = 'none';
+            return;
+        }
     
         let url = `https://swiftle.org/api/suggestions?partial=${encodeURIComponent(partialName)}`;
         fetch(url)

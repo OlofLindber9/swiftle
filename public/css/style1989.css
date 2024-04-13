@@ -88,7 +88,9 @@ body::before {
 }
 
 .suggestion-item.selected {
-    background-color: #a09e9a;
+  color: #000000;
+  background-color: #5584AC;
+  box-shadow: inset 0 0 10px rgb(34, 33, 33); 
 }
 /*___________________________________________________________________________ATTEMPTS__________________________________________________________________________*/
 

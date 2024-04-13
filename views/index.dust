@@ -78,7 +78,10 @@
 <div id="rulesModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content rules">
-    <span class="close-button">×</span>
+        <div class="modal-background"></div>
+        <div class="modal-body">
+        <span class="close-button">×</span>
+    </div>
     </div>
 </div>
 
