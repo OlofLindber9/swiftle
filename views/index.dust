@@ -55,7 +55,7 @@
                 <span class="close-button">×</span>
                 <img class="modal-image" src="">
                 <span class="share-button">Share</span>
-                <span id="copyNotification" class="copy-notification">Copied to clipboard!</span>
+                <span id="copyNotificationWin" class="copy-notification">Copied to clipboard!</span>
 
     </div>
     </div>
@@ -70,6 +70,7 @@
                 <span class="close-button">×</span>
                 <img class="modal-image" src="">
                 <span class="share-button">Share</span>
+                <span id="copyNotificationLose" class="copy-notification">Copied to clipboard!</span>
     </div>
     </div>
 </div>

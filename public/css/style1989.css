@@ -451,8 +451,8 @@ font-size: 30px;
   }
 
   .rules-list{
-    color: #5584AC;
-    font-family: '1989';
+    color: #000000;
+    font-family: 'sans-serif';
     list-style-type: none;
     list-style-type: disc;
     padding-left: 40px;

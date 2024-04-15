@@ -59,7 +59,7 @@ document.addEventListener('initComplete', async function() {
     songStreamsheader.textContent = 'Streams'
     headerRow.appendChild(songStreamsheader); 
     //resetGuesses();
-    completeReset();
+    //completeReset();
     checkGameStatus();
 
 
@@ -226,7 +226,6 @@ document.addEventListener('initComplete', async function() {
             info = data;
             songNumberCell.textContent = info[0].tracknumber;
             guessTrackNumber = info[0].tracknumber;
-            console.log(info)
             return fetch(url2);
         })
         .then(response => response.json())
@@ -388,7 +387,6 @@ document.addEventListener('initComplete', async function() {
             const response = await fetch(url);
             const data = await response.json();
 
-            console.log(data.count); 
             return data.count > 0;
         } catch (error) {
             console.error('Error during search:', error);
@@ -428,7 +426,7 @@ document.addEventListener('initComplete', async function() {
 
     const supportButton = document.getElementById('support-button');
     supportButton.addEventListener('click', function() {
-        window.open('https://ko-fi.com/colewordle', '_blank');
+        window.open('https://ko-fi.com/swiftle', '_blank');
     });
         
     function playGameOverSound(targetSong) {
@@ -457,16 +455,14 @@ document.addEventListener('initComplete', async function() {
         const gameState = localStorage.getItem('gameState');
         const lastPlayedTimestamp = localStorage.getItem('lastPlayed');
         var guesses = getGuesses();
-        console.log("guesses from checkGameStatus", guesses);
 
         if(guesses.length > 0) {
-            console.log("guesses length is greater than 0");
             guesses.forEach(element => {
                 const guessRow = document.createElement('li');  
                 guessRow.className = "matrix-row"; 
-                console.log(element.songName);
                 displayAttempt(element.songName, guessRow);
             });
+            numberOfAttempts = guesses.length;
         }
 
         if (gameState && lastPlayedTimestamp) {
@@ -484,6 +480,7 @@ document.addEventListener('initComplete', async function() {
                 localStorage.removeItem('gameState');
                 localStorage.removeItem('lastPlayed');
                 resetGuesses();
+                numberOfAttempts = 0;
                 gameOver = false;
                 return;
                 // game can start
@@ -496,7 +493,11 @@ document.addEventListener('initComplete', async function() {
 
     function displayResult(gameState, guesses) {
         // Implement this function based on how you want to show results
-        console.log('Displaying result:', gameState);
+        if(gameState === 'lose'){
+            loseModal.style.display = 'block';
+        } else if (gameState === 'win'){
+            victoryModal.style.display = 'block'; 
+        }
     }
 
     function getGuesses() {

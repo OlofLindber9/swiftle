@@ -15,7 +15,7 @@ function seededRandom(max, min, seed) {
   return Math.floor((random - Math.floor(random)) * (max - min + 1)) + min;
 }
 
-function deterministicRandomIntFromDate(dateStr, minVal = 1, maxVal = 57) {
+function deterministicRandomIntFromDate(dateStr, minVal = 1, maxVal = 147) {
   const seed = hashString(dateStr);
   return seededRandom(maxVal, minVal, seed);
 }
@@ -47,7 +47,6 @@ function main() {
     console.log(`Current Date: ${dateStr}`);
     
     window.correctSongId = deterministicRandomIntFromDate(dateStr);
-    console.log(`Correct Song ID: ${correctSongId}`);
     
       // Dispatch the event after a brief timeout
     setTimeout(() => {

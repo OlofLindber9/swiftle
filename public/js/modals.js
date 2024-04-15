@@ -45,12 +45,12 @@ document.addEventListener('initComplete', async function() {
     rulesList.className = 'rules-list';
 
     const rules = [
-    "You get eight guesses to guess a mystery song from any of Taylor Swift 10 studio albums!",
+    "You get eight guesses to guess a mystery song from any of Taylor Swift 10 studio albums! Ranging from Taylor Swift (2006) to Midnights (2022). Deluxe verisons not are included.",
     'Green in any column  indicates a complete match!',
     'Yellow in the album or track number column  indicates that this attribute is within 2 (albums or tracks).',
     'Yellow in the track length column  indicates that the song length is within 30 seconds.',
-    'Yellow in the features column  indicates that at least one of the featured artists is correct.',
-    'The arrows are hinting if the correct tracknumber/songlength is higher/longer ( ↑ ) or lower/shorter ( ↓ )',
+    'Yellow in the streams column indicates that the songs total streams on Spotify are within 50 million streams.',
+    'The arrows are hinting if the correct tracknumber/songlength etc is higher/longer ( ↑ ) or lower/shorter ( ↓ )',
     ];
 
     rules.forEach(ruleText => {
@@ -58,7 +58,7 @@ document.addEventListener('initComplete', async function() {
         rule.innerHTML = ruleText.replace(/Green in any column/g, '<span class="green-text">Green in any column</span>')
                                  .replace(/Yellow in the album or track number column/g, '<span class="yellow-text">Yellow in the album or track number column</span>')
                                  .replace(/Yellow in the track length column/g, '<span class="yellow-text">Yellow in the track length column</span>')
-                                 .replace(/Yellow in the features column/g, '<span class="yellow-text">Yellow in the features column</span>');
+                                 .replace(/Yellow in the streams column/g, '<span class="yellow-text">Yellow in the features column</span>');
         rulesList.appendChild(rule);
       });
 
@@ -101,7 +101,7 @@ document.addEventListener('initComplete', async function() {
             console.error('Failed to copy results to clipboard: ', err);
         });
 
-        var notificationBox = document.getElementById('copyNotification');
+        var notificationBox = document.getElementById('copyNotificationWin');
 
         // Apply the fadeInOut animation to the notification box
         notificationBox.style.animation = 'fadeInOut 2s';
@@ -131,10 +131,9 @@ document.addEventListener('initComplete', async function() {
     loseShareButton.onclick = function() {
         // Retrieve the guesses from localStorage or however they are stored
         const guesses = JSON.parse(localStorage.getItem('guesses')) || [];
-        console.log("we SHARE");
 
         // Format the guesses into a message
-        let message = `Swiftle #001\n\n`;
+        let message = `Swiftle #${gameID}\n\n`;
         guesses.forEach((guess, index) => {
             var emoji;
             if (index === guesses.length - 1) {
@@ -143,8 +142,8 @@ document.addEventListener('initComplete', async function() {
                 emoji = '⬜️';
             }
             message += `${emoji}`;
-            message += '\n https://swiftle.org/';
         });
+        message += '\n https://swiftle.org/'; 
 
         // Copy the message to the clipboard
         navigator.clipboard.writeText(message).then(() => {
@@ -153,7 +152,7 @@ document.addEventListener('initComplete', async function() {
             console.error('Failed to copy results to clipboard: ', err);
         });
 
-        var notificationBox = document.getElementById('copyNotification');
+        var notificationBox = document.getElementById('copyNotificationLose');
 
         // Apply the fadeInOut animation to the notification box
         notificationBox.style.animation = 'fadeInOut 2s';
