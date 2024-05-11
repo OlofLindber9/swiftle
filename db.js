@@ -1,4 +1,5 @@
-const { Client } = require('pg')
+import pkg from 'pg';
+const { Client } = pkg;
 console.log('hello')
 
 const client = new Client({
@@ -15,4 +16,4 @@ client.connect((err) => {
         console.log('swiftle db connected')
     }
 })
-module.exports = client;
+export default client;

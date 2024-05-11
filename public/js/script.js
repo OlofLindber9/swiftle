@@ -31,6 +31,7 @@ document.addEventListener('initComplete', async function() {
     const attemptsDiv = document.createElement('li');  
     attemptsDiv.style.listStyleType = 'none';
     headerRow.className = "matrix-row";
+    headerRow.style.borderBottom = 'none';
     attemptsDiv.className = "guessesMatrix";
     gameDiv.appendChild(headerRow); 
 

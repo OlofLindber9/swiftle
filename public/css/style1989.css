@@ -20,13 +20,12 @@ body::before {
     right: 0;
     bottom: 0;
     pointer-events: none;
-    box-shadow: inset 0 0 500px rgba(185, 182, 179, 0.616); 
     z-index: 1;
 }
 
 .title{
     background-size: 60%;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(0.2em);
     background-color: rgba(117, 149, 160, 0.349);
     width: 30%;
     margin-left: auto;
@@ -37,7 +36,7 @@ body::before {
     text-align: center;
     font-weight: bold;
     border: transparent;
-    border-radius: 50px;
+    border-radius: 3.125em;
     font-size: 5.5vw;
     font-family: '1989';
     transition: all ease 0.3s;
@@ -46,7 +45,7 @@ body::before {
 
 /*___________________________________________________________________________SUGGESTIONS__________________________________________________________________________*/
 .suggestion-box {
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(0.2em);
     background-color: rgba(117, 149, 160, 0.349);
     position: absolute;
     z-index: 1000;
@@ -54,19 +53,19 @@ body::before {
     top: 100%;
     left: 0; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    max-height: 200px;
+    max-height: 20vh;
     overflow-y: auto;
     display: none;
 }
 
 .suggestion-box::-webkit-scrollbar-track {
     background: #5584AC; /* Track color */
-    border-radius: 10px;
+    border-radius: 0.625em;
 }
 
 .suggestion-box::-webkit-scrollbar-thumb {
     background: #263a4d; /* Thumb color */
-    border-radius: 10px;
+    border-radius: 0.625em;
 }
 
 .suggestion-box::-webkit-scrollbar-thumb:hover {
@@ -74,7 +73,7 @@ body::before {
 }
 
 .suggestion-box::-webkit-scrollbar {
-    width: 8px; /* Scrollbar width */
+    width: 0.5em; /* Scrollbar width */
 }
 
 .suggestion-item{
@@ -84,13 +83,13 @@ body::before {
 .suggestion-item:hover{
     color: #000000;
     background-color: #5584AC;
-    box-shadow: inset 0 0 10px rgb(34, 33, 33); 
+    box-shadow: inset 0 0 0.5em rgb(34, 33, 33); 
 }
 
 .suggestion-item.selected {
   color: #000000;
   background-color: #5584AC;
-  box-shadow: inset 0 0 10px rgb(34, 33, 33); 
+  box-shadow: inset 0 0 0.5em rgb(34, 33, 33); 
 }
 /*___________________________________________________________________________ATTEMPTS__________________________________________________________________________*/
 
@@ -102,10 +101,10 @@ body::before {
 }
 
 .guess-input, .btn-primary {
-  margin: 20px 0;
+  margin:  1.25em;
   width: 100%;
   background-color: #5584AC;
-  border-radius: 20px;
+  border-radius: 1.25em;
 }
 
 #guess-input {
@@ -116,10 +115,10 @@ body::before {
   background-color: #5584AC;
   color: #ffffff;
   border: 1px solid #5584AC;
-  border-radius: 20px;
+  border-radius: 1.25em;
   font-family: '1989'; 
-  padding: 10px 20px;
-  font-size: 24px;
+  padding: 0.625em 1.25em;
+  font-size: 1.5em;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -140,7 +139,7 @@ body::before {
 .past-guesses li {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 0.3125em;
 }
 
 body, html {
@@ -163,12 +162,12 @@ overflow-y: auto;
 
 .guessesMatrix::-webkit-scrollbar-track {
 background: #5584AC; /* Track color */
-border-radius: 10px;
+border-radius: 0.625em;
 }
 
 .guessesMatrix::-webkit-scrollbar-thumb {
 background: #263a4d; /* Thumb color */
-border-radius: 10px;
+border-radius: 0.625em;
 }
 
 .guessesMatrix::-webkit-scrollbar-thumb:hover {
@@ -176,18 +175,18 @@ background: #3d607e; /* Thumb hover color */
 }
 
 .guessesMatrix::-webkit-scrollbar {
-width: 8px; /* Scrollbar width */
+width: 0.5em; /* Scrollbar width */
 }
 
 .input-area {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.625em;
     justify-content: center;
-    width: 400px;
+    width: 25em;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 2.5em;
 }
 
 
@@ -195,35 +194,35 @@ width: 8px; /* Scrollbar width */
     justify-content: center;
     align-items: center;
     display: flex;
-    padding: 15px;
-    margin: 0 4px;
-    margin-right: -3px;
-    margin-left: -3px;
+    padding: 0.9375em;
+    margin: 0 0.25em;
+    margin-right: -0.1875em;
+    margin-left: -0.1875em;
     border: 1px solid antiquewhite;
-    border-radius: 10px;
+    border-radius: 0.625em;
     text-align: center;
     color: white;
     overflow: hidden; 
     white-space: nowrap; 
     text-overflow: ellipsis;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 0.3125 rgba(255, 255, 255, 0.7);
 }
 
 .cell.image {
     justify-content: center;
     align-items: center;
     display: flex;
-    padding: 2px;
-    margin: 0 4px;
-    margin-right: -3px;
-    margin-left: -3px;
-    border: 1px solid antiquewhite;
+    padding: 0.125em;
+    margin: 0 0.25em;
+    margin-right: -0.1875em;
+    margin-left: -0.1875em;
+    border: 0.0625 solid antiquewhite;
     text-align: center;
     color: white;
     overflow: hidden; 
     white-space: nowrap; 
     text-overflow: ellipsis;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 0.312em rgba(255, 255, 255, 0.7);
 }
 
 .cell.black { 
@@ -533,3 +532,154 @@ font-size: 30px;
     text-decoration: none;
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+
+    body {
+      background-image: url('../resources/1989_background_Mobile.JPG'); 
+      background-size: cover;
+      background-position: center;
+  }
+
+    .title{
+      background-size: 55%;
+      width: 70%;
+      font-size: 20vw;
+    }
+    .input-area {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.625em;
+      width: 100%;
+      margin-top: 2em;
+  }
+
+  #guess-input {
+    flex: 1 0 auto;
+    min-width: 150px;;
+  }
+  
+  #submit-guess {
+    white-space: nowrap;
+    border-radius: 1.25em;
+    padding: 0.625em 1.25em;
+    font-size: 1.2em;
+  }
+
+
+  .cell {
+      padding: 0.9375em;
+      margin: 0em;
+      margin-right: 0em;
+      margin-left: 0em;
+      text-align: center;
+      flex-wrap: wrap;
+      word-wrap: break-word;
+      white-space: normal;
+  }
+
+  .cell.image {
+      padding: 0.em;
+      margin: 0em;
+      margin-right: 0em;
+      margin-left: 0em;
+      border: 0.0625 solid antiquewhite;
+      text-align: center;
+      white-space: nowrap; 
+  }
+
+  .album-image {
+    width: 40%;
+    height: 40%;
+    display: block;
+  }
+
+  .matrix-row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border-bottom: 5px solid #263a4d;
+      padding-bottom: 10px;
+    }
+
+  .header-matrixlabel{
+      font-size: 24px;
+      border-radius: 10px;
+      border-bottom: 1px solid #ccc;
+  }
+
+  .guessesMatrix{
+    max-height: 28.5vh;
+    }
+  /* _____________________________________________________Rules______________________________________*/
+
+  .rules-list li {
+    font-size: 10px;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .rule-purpose-message{
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+  /* _____________________________________________________BUTTONS______________________________________*/
+  .rules-button{
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-right: 0px; 
+    margin-left: 0px;
+    top: 20px;
+  }
+
+  .support-button{
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 20px;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+
+  .theme-button{
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 10px;
+    top: 20px;
+  }
+  /* _____________________________________________________suggestionBOX______________________________________*/
+  .suggestion-box {
+    width: 100%;
+    max-height: 20vh;
+}
+/*____________________________________________________MODAL__________________________________________________ */
+
+/* Modal Content */
+.modal-content {
+  width: 71%;
+}
+
+.modal-image {
+  max-width: 70%;
+}
+
+/* The Close Button */
+.close-button {
+  font-size: 34px;
+}
+
+
+.share-button{
+  margin-top: 3%;
+  max-width: 70%;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+}
