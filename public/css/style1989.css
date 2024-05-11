@@ -558,7 +558,7 @@ font-size: 30px;
 
   #guess-input {
     flex: 1 0 auto;
-    min-width: 150px;;
+    min-width: 6,3vw;
   }
   
   #submit-guess {
@@ -598,19 +598,19 @@ font-size: 30px;
 
   .matrix-row {
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 10px;
-      margin-left: 10px;
-      margin-right: 10px;
-      border-radius: 5px;
-      border-bottom: 5px solid #263a4d;
-      padding-bottom: 10px;
+      gap: 2,42vw;
+      margin-bottom: 0.5em;
+      margin-left: 0.9em;
+      margin-right: 0.9em;
+      border-radius: 0.45em;
+      border-bottom: 0.45em solid #263a4d;
+      padding-bottom: 0.9em;
     }
 
   .header-matrixlabel{
-      font-size: 24px;
-      border-radius: 10px;
-      border-bottom: 1px solid #ccc;
+      font-size: 1.5em;
+      border-radius: 0.5em;
+      border-bottom: 0.05em solid #ccc;
   }
 
   .guessesMatrix{
@@ -619,14 +619,14 @@ font-size: 30px;
   /* _____________________________________________________Rules______________________________________*/
 
   .rules-list li {
-    font-size: 10px;
+    font-size: 0.7em;
     text-align: left;
-    margin-bottom: 5px;
+    margin-bottom: 0.25em;
   }
 
   .rule-purpose-message{
-    font-size: 10px;
-    margin-bottom: 10px;
+    font-size: 0.7em;
+    margin-bottom: 0.7em;
   }
   /* _____________________________________________________BUTTONS______________________________________*/
   .rules-button{
