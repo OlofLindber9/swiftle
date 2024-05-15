@@ -112,6 +112,9 @@ document.addEventListener('initComplete', async function() {
             saveGuess(guess, numberOfAttempts);        
             return;
         }
+        if(numberOfAttempts === 0){
+            saveFirstGuessPlayed();
+        }
 
         numberOfAttempts++
 
@@ -455,6 +458,19 @@ document.addEventListener('initComplete', async function() {
     function checkGameStatus() {
         const gameState = localStorage.getItem('gameState');
         const lastPlayedTimestamp = localStorage.getItem('lastPlayed');
+        const firstGuessPlayedTimeStamp = localStorage.getItem('FirstGuessPlayed');
+        const firstGuessPlayed = new Date(parseInt(firstGuessPlayedTimeStamp));
+
+        //check if game was begun more than a day ago
+        if (!(firstGuessPlayed.toDateString() === currentDate.toDateString())){
+            resetGuesses();
+            resetFirstGuessPlayed();
+            numberOfAttempts = 0;
+            gameOver = false;
+            localStorage.removeItem('gameState');
+            localStorage.removeItem('lastPlayed');
+        }
+
         var guesses = getGuesses();
 
         if(guesses.length > 0) {
@@ -481,6 +497,7 @@ document.addEventListener('initComplete', async function() {
                 localStorage.removeItem('gameState');
                 localStorage.removeItem('lastPlayed');
                 resetGuesses();
+                resetFirstGuessPlayed();
                 numberOfAttempts = 0;
                 gameOver = false;
                 return;
@@ -525,6 +542,13 @@ document.addEventListener('initComplete', async function() {
         const now = new Date();
         localStorage.setItem('gameState', gameState); // gameState should be a string
         localStorage.setItem('lastPlayed', now.getTime().toString());
+    }
+    function saveFirstGuessPlayed() {
+        const now = new Date();
+        localStorage.setItem('FirstGuessPlayed', now.getTime().toString());
+    }
+    function resetFirstGuessPlayed() {
+        localStorage.removeItem('FirstGuessPlayed');
     }
 
     function getGuesses() {
