@@ -460,6 +460,7 @@ document.addEventListener('initComplete', async function() {
         const lastPlayedTimestamp = localStorage.getItem('lastPlayed');
         const firstGuessPlayedTimeStamp = localStorage.getItem('FirstGuessPlayed');
         const firstGuessPlayed = new Date(parseInt(firstGuessPlayedTimeStamp));
+        const currentDate = new Date();
 
         //check if game was begun more than a day ago
         if (!(firstGuessPlayed.toDateString() === currentDate.toDateString())){
