@@ -550,7 +550,7 @@ font-size: 30px;
     border-bottom: 1px solid #000000
   }
 
-  
+  /*___________________________________________________________________________MOBILE_UI__________________________________________________________________________*/
   @media (max-width: 768px) {
 
     body {
@@ -578,7 +578,7 @@ font-size: 30px;
 
   #guess-input {
     flex: 1 0 auto;
-    min-width: 150px;;
+    min-width: 6,3vw;
   }
   
   #submit-guess {
@@ -617,20 +617,20 @@ font-size: 30px;
   }
 
   .matrix-row {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 10px;
-      margin-left: 10px;
-      margin-right: 10px;
-      border-radius: 5px;
-      border-bottom: 5px solid #000000;
-      padding-bottom: 10px;
-    }
-
-  .header-matrixlabel{
-      font-size: 20px;
-      border-radius: 10px;
-      border-bottom: 1px solid #ccc;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.78vw;
+    margin-bottom: 2.78vw;
+    margin-left: 2.78vw;
+    margin-right: 2.78vw;
+    border-radius: 1.39vw;
+    border-bottom: 1.39vw solid #000000;
+    padding-bottom: 2.78vw;
+  }
+  
+  .header-matrixlabel {
+    font-size: 5.56vw;
+    border-radius: 2.78vw;
+    border-bottom: 0.28vw solid #ccc;
   }
 
   .guessesMatrix{
@@ -639,40 +639,40 @@ font-size: 30px;
   /* _____________________________________________________Rules______________________________________*/
 
   .rules-list li {
-    font-size: 10px;
+    font-size: 2.78vw;
     text-align: left;
-    margin-bottom: 5px;
+    margin-bottom: 0.69vh;
   }
-
-  .rule-purpose-message{
-    font-size: 10px;
-    margin-bottom: 10px;
+  
+  .rule-purpose-message {
+    font-size: 2.78vw;
+    margin-bottom: 1.39vh;
   }
   /* _____________________________________________________BUTTONS______________________________________*/
-  .rules-button{
-    padding: 10px 20px;
-    font-size: 15px;
-    border-radius: 10px;
-    margin-right: 0px; 
-    margin-left: 0px;
-    top: 20px;
+  .rules-button {
+    padding: 1.39vh 5.56vw;
+    font-size: 4.17vw;
+    border-radius: 2.78vw;
+    margin-right: 0;
+    margin-left: 0;
+    top: 2.78vh;
   }
-
-  .support-button{
-    padding: 5px 10px;
-    font-size: 10px;
-    border-radius: 20px;
-    margin-left: 0px;
-    margin-top: 20px;
-    color: black; 
-    border-bottom: 1px solid #000000;
+  
+  .support-button {
+    padding: 0.69vh 2.78vw;
+    font-size: 2.78vw;
+    border-radius: 5.56vw;
+    margin-left: 0;
+    margin-top: 2.78vh;
+    color: black;
+    border-bottom: 0.28vw solid #000000;
   }
-
-  .theme-button{
-    padding: 10px 15px;
-    font-size: 15px;
-    border-radius: 10px;
-    top: 20px;
+  
+  .theme-button {
+    padding: 1.39vh 4.17vw;
+    font-size: 4.17vw;
+    border-radius: 2.78vw;
+    top: 2.78vh;
   }
   /* _____________________________________________________suggestionBOX______________________________________*/
   .suggestion-box {
@@ -692,16 +692,16 @@ font-size: 30px;
 
 /* The Close Button */
 .close-button {
-  font-size: 34px;
+  font-size: 9.44vw;
 }
 
 
 .share-button{
   margin-top: 3%;
   max-width: 70%;
-  padding: 10px 20px;
-  font-size: 20px;
-  border-radius: 10px;
+  padding: 1.39vh 5.56vw;
+  font-size: 5.56vw;
+  border-radius: 2.78vw;
   position: relative;
 }
 }
