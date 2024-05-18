@@ -15,7 +15,7 @@ function seededRandom(max, min, seed) {
   return Math.floor((random - Math.floor(random)) * (max - min + 1)) + min;
 }
 
-function deterministicRandomIntFromDate(dateStr, minVal = 1, maxVal = 147) {
+function deterministicRandomIntFromDate(dateStr, minVal = 1, maxVal = 163) {
   const seed = hashString(dateStr);
   return seededRandom(maxVal, minVal, seed);
 }

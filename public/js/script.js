@@ -18,7 +18,8 @@ document.addEventListener('initComplete', async function() {
         "Lover": 7,
         "Folklore": 8,
         "Evermore": 9,
-        "Midnights": 10
+        "Midnights": 10,
+        "TTPD": 11,
     };
     let numberOfAttempts = 0;
     var gameOver = false;
@@ -440,6 +441,10 @@ document.addEventListener('initComplete', async function() {
             targetSong = 'So It Goes…';
         } else if (targetSong === 'Question...?') {
             targetSong = 'Question...';
+        } else if (targetSong === 'Guilty as Sin?') {
+            targetSong = 'Guilty as Sin';
+        } else if(targetSong === "Who's Afraid of Little Old Me?") {
+            targetSong = "Who's Afraid of Little Old Me";
         }
         var gameOverSound = new Audio(`/resources/snippets/${targetSong}.mp3`); 
         gameOverSound.play();

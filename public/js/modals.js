@@ -45,7 +45,7 @@ document.addEventListener('initComplete', async function() {
     rulesList.className = 'rules-list';
 
     const rules = [
-    "You get eight guesses to guess a mystery song from any of Taylor Swift 10 studio albums! Ranging from Taylor Swift (2006) to Midnights (2022). Deluxe verisons not are included.",
+    "You get eight guesses to guess a mystery song from any of Taylor Swift 11 studio albums! Ranging from Taylor Swift (2006) to The Tortured Poets Department (2024). Deluxe verisons not are included.",
     'Green in any column  indicates a complete match!',
     'Yellow in the album or track number column  indicates that this attribute is within 2 (albums or tracks).',
     'Yellow in the track length column  indicates that the song length is within 30 seconds.',
